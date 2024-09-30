@@ -1,5 +1,7 @@
-{ pkgs, ... }
+{ pkgs, ... }:
 
 {
-programs.brave.enable = true;
+  environment.systemPackages = with pkgs; [
+    brave
+  ];
 }
