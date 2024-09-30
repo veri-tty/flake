@@ -24,6 +24,7 @@
 	./nixos/boot.nix
 	./nixos/fonts.nix
 	./nixos/utils.nix
+	./nixos/shell.nix
       ];
     };
   };
