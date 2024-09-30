@@ -1,5 +1,5 @@
 { pkgs, ... }:
 
 {
-pkgs.fish.enable = true;
+programs.fish.enable = true;
 }
