@@ -2,9 +2,6 @@
 
 {
   environment.systemPackages = with pkgs; [
-    git
-    curl
-    wget
-    ripgrep
+    home-manager
   ];
 }
