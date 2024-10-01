@@ -26,6 +26,7 @@
 	./nixos/utils.nix
 	./nixos/shell.nix
 	./nixos/browsers.nix
+	./nixos/hyprland.nix
       ];
     };
   };
