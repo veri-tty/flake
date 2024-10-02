@@ -4,7 +4,6 @@
   inputs = {
       nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     };
-  };
 
   outputs = { nixpkgs, ... } @ inputs:
   {
@@ -25,6 +24,7 @@
 	./nixos/browsers.nix
 	./nixos/hyprland.nix
 	./nixos/home-manager.nix
+	./nixos/virtualisation.nix
       ];
     };
   };
