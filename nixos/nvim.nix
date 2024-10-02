@@ -1,6 +1,12 @@
 { pkgs, ... }:
 
 {
+  environment = {
+    systemPackages = with pkgs; [
+      inputs.nixvim.packages.${system}.default
+    ];
+  };
+
   programs.nixvim = {
     enable = true;
 
