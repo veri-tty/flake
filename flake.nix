@@ -25,6 +25,8 @@
 	./nixos/hyprland.nix
 	./nixos/home-manager.nix
 	./nixos/virtualisation.nix
+	./nixos/mail.nix
+	./nixos/nvim.nix
       ];
     };
   };
