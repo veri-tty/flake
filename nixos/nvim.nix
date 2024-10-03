@@ -1,12 +1,9 @@
-{ config, pkgs, inputs, ... }:
+{ pkgs, lib, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
-    inputs.nixvim.nixosModules.nixvim
-  ];
 
-  programs.neovim = {
+  programs.nixvim = {
     enable = true;
-    package = inputs.nixvim.nixosModules.nixvim;
+    colorschemes.catppuccin.enable = true;
   };
 }
