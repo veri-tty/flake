@@ -1,16 +1,15 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
+let
+  nixvim = pkgs.nixvim;
+in
 {
-  environment = {
-    systemPackages = with pkgs; [
-      inputs.nixvim.packages.${system}.default
-    ];
-  };
+  environment.systemPackages = [
+    nixvim
+  ];
 
-  programs.nixvim = {
+  programs.neovim = {
     enable = true;
-
-    colorschemes.catppuccin.enable = true;
-    plugins.lualine.enable = true;
+    package = nixvim;
   };
 }

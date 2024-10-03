@@ -11,8 +11,7 @@
     };
   };
 
-  outputs = { nixpkgs, ... } @ inputs:
-  {
+  outputs = { nixpkgs, ... } @ inputs: {
     nixosConfigurations.roamer = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [
