@@ -1,15 +1,12 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
-let
-  nixvim = pkgs.nixvim;
-in
 {
-  environment.systemPackages = [
-    nixvim
+  environment.systemPackages = with pkgs; [
+    inputs.nixvim.packages.${config.system}.default
   ];
 
   programs.neovim = {
     enable = true;
-    package = nixvim;
+    package = inputs.nixvim.packages.${config.system};
   };
 }
