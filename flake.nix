@@ -2,13 +2,13 @@
   description = "verity's flake";
 
   inputs = {
-      nixpkgs = {
-        url = "github:NixOS/nixpkgs/nixos-24.05";
-      };  
-      nixvim = {
-        url = "github:nix-community/nixvim/nixos-24.05";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
+    nixpkgs = {
+      url = "github:NixOS/nixpkgs/nixos-24.05";
+    };  
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { nixpkgs, ... } @ inputs:
@@ -32,7 +32,8 @@
 	./nixos/home-manager.nix
 	./nixos/virtualisation.nix
 	./nixos/mail.nix
-	./nixos/nvim.nix
+	./nixos/obsidian.nix
+#	./nixos/nvim.nix
       ];
     };
   };
