@@ -1,7 +1,16 @@
-{ pkgs, nixvim, ... }: 
+{ pkgs, ... }:
 
+{
+  environment = {
+    systemPackages = with pkgs; [
+      inputs.nixvim.packages.${system}.default
+    ];
+  };
 
-  inputs.nixvim.nixosModules.nixvim = {
+  programs.nixvim = {
     enable = true;
-    colorschemes.gruvbox.enable = true;
-  }
+
+    colorschemes.catppuccin.enable = true;
+    plugins.lualine.enable = true;
+  };
+}
