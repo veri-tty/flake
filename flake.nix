@@ -6,7 +6,7 @@
       url = "github:NixOS/nixpkgs/nixos-24.05";
     };  
     nixvim = {
-      url = "github:nix-community/nixvim";
+      url = "github:nix-community/nixvim/nixos-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -33,7 +33,7 @@
 	./nixos/virtualisation.nix
 	./nixos/mail.nix
 	./nixos/obsidian.nix
-#	./nixos/nvim.nix
+	./nixos/nvim.nix
       ];
     };
   };
