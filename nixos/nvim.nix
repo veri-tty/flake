@@ -2,11 +2,11 @@
 
 {
   environment.systemPackages = with pkgs; [
-    inputs.nixvim.packages.${config.system}.default
+    inputs.nixvim.nixosModules.nixvim
   ];
 
   programs.neovim = {
     enable = true;
-    package = inputs.nixvim.packages.${config.system};
+    package = inputs.nixvim.nixosModules.nixvim;
   };
 }
