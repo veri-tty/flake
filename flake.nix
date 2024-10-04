@@ -35,6 +35,7 @@
         ./nixos/obsidian.nix
 	nixvim.nixosModules.nixvim
         ./nixos/nvim.nix
+	./nixos/theme.nix
       ];
     };
   };
