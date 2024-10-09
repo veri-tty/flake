@@ -1,9 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  imports = {
-  ./home/shell/fish.nix
-
+  imports = [
+  ./home/shell/fish/default.nix
+  ];
 
   home.username = "verity";
   programs.home-manager.enable = true;
