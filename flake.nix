@@ -6,7 +6,7 @@
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };  
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/master";
       # The `follows` keyword in inputs is used for inheritance.
       # Here, `inputs.nixpkgs` of home-manager is kept consistent with
       # the `inputs.nixpkgs` of the current flake,
@@ -37,7 +37,13 @@
         ./nixos/virtualisation.nix
         ./nixos/mail.nix
         ./nixos/obsidian.nix
-     	./nixos/theme.nix
+        ./nixos/theme.nix
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.verity= import ./home.nix;
+        }
       ];
     };
   };
