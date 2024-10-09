@@ -1,9 +1,11 @@
 { config, pkgs, ... }:
 
 {
-  home.username = "verity";
-  home.homeDirectory = "/home/verity/";
+  imports = {
+  ./home/shell/fish.nix
 
+
+  home.username = "verity";
   programs.home-manager.enable = true;
-  users.verity.home.stateVersion = "24.05";
+  home.stateVersion = "24.05";
 }

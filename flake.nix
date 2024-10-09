@@ -26,7 +26,6 @@
         ./nixos/vpn.nix
         ./nixos/locale.nix
         ./nixos/users.nix
-        ./nixos/gnome.nix
         ./nixos/boot.nix
         ./nixos/fonts.nix
         ./nixos/utils.nix
