@@ -33,7 +33,6 @@
         ./nixos/shell.nix
         ./nixos/browsers.nix
         ./nixos/hyprland.nix
-        ./nixos/home-manager.nix
         ./nixos/virtualisation.nix
         ./nixos/mail.nix
         ./nixos/obsidian.nix
