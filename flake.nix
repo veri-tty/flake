@@ -36,6 +36,7 @@
         ./nixos/mail.nix
         ./nixos/obsidian.nix
         ./nixos/theme.nix
+	./nixos/networking.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
