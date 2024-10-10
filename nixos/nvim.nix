@@ -10,16 +10,7 @@
     plugins = {
       treesitter = {
         enable = true;
-        grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
-          rust
-          nix
-          bash
-          fish
-          toml
-          yaml
-          lua
-          vimdoc
-        ];
+	settings.highlight.enable = true;
       };
     
       lsp = {
