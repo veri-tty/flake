@@ -1,6 +1,6 @@
 { ... }:
 
 {
-  networking.hostName = "roamer"
+  networking.hostName = "roamer";
   networking.networkmanager.enable = true;
 }

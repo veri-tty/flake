@@ -22,7 +22,7 @@
 
   home.sessionVariables = {
     PF_INFO = "ascii title os host kernel uptime memory";
-    PF_CUSTOM_LOGOS = "/home/zeroth/.config/pfetch_logos.sh";
+    PF_CUSTOM_LOGOS = "/home/verity/.config/pfetch_logos.sh";
     PF_FAST_PKG_COUNT = 1;
     PF_COL1 = 4;
   };
