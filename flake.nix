@@ -7,10 +7,6 @@
     };  
     home-manager = {
       url = "github:nix-community/home-manager/master";
-      # The `follows` keyword in inputs is used for inheritance.
-      # Here, `inputs.nixpkgs` of home-manager is kept consistent with
-      # the `inputs.nixpkgs` of the current flake,
-      # to avoid problems caused by different versions of nixpkgs.
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
@@ -19,7 +15,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... } @ inputs: {
+  outputs = { self, nixpkgs, home-manager, nixvim, ... } @ inputs: {
 
     nixosConfigurations.roamer = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
@@ -29,6 +25,7 @@
         ./nixos/nixpkgs.nix
         ./nixos/vpn.nix
         ./nixos/locale.nix
+	./nixos/foot.nix
         ./nixos/users.nix
         ./nixos/boot.nix
         ./nixos/fonts.nix
@@ -46,9 +43,8 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.verity= import ./home.nix;
-      
         }
-        inputs.nixosModules.nixvim
+        inputs.nixvim.nixosModules.nixvim
         ./nixos/nvim.nix 
       ];
     };
