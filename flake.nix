@@ -25,6 +25,7 @@
 	./nixos/sync.nix
 	./nixos/code.nix
         ./nixos/nixpkgs.nix
+	./nixos/rust.nix
         ./nixos/vpn.nix
         ./nixos/locale.nix
 	./nixos/foot.nix
