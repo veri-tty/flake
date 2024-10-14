@@ -22,6 +22,7 @@
       modules = [
         ./nixos/hardware-configuration.nix
         ./nixos/nix-settings.nix
+	./nixos/sync.nix
 	./nixos/code.nix
         ./nixos/nixpkgs.nix
         ./nixos/vpn.nix
