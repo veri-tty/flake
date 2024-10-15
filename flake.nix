@@ -20,28 +20,29 @@
     nixosConfigurations.roamer = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [
-        ./nixos/hardware-configuration.nix
-        ./nixos/nix-settings.nix
-	./nixos/sync.nix
-	./nixos/code.nix
-        ./nixos/nixpkgs.nix
-	./nixos/rust.nix
-        ./nixos/vpn.nix
-        ./nixos/locale.nix
-	./nixos/foot.nix
-	./nixos/crypto.nix
-        ./nixos/users.nix
-        ./nixos/boot.nix
-        ./nixos/fonts.nix
-        ./nixos/utils.nix
-        ./nixos/shell.nix
-        ./nixos/browsers.nix
-        ./nixos/hyprland.nix
-        ./nixos/virtualisation.nix
-        ./nixos/mail.nix
-        ./nixos/obsidian.nix
-        ./nixos/theme.nix
-	./nixos/networking.nix
+        ./hardware-configuration.nix
+        ./nix-settings.nix
+	./sync.nix
+	./code.nix
+        ./nixpkgs.nix
+	./rust.nix
+        ./vpn.nix
+        ./locale.nix
+	./foot.nix
+	./crypto.nix
+        ./users.nix
+        ./boot.nix
+        ./fonts.nix
+        ./utils.nix
+        ./shell.nix
+        ./browsers.nix
+        ./hyprland.nix
+        ./virtualisation.nix
+        ./mail.nix
+        ./obsidian.nix
+        ./theme.nix
+	./networking.nix
+	./home-manager.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
@@ -49,7 +50,7 @@
           home-manager.users.verity= import ./home.nix;
         }
         inputs.nixvim.nixosModules.nixvim
-        ./nixos/nvim.nix 
+        ./nvim.nix 
       ];
     };
   };
