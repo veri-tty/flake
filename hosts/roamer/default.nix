@@ -18,13 +18,14 @@ inputs.nixpkgs.lib.nixosSystem rec {
     inputs.home-manager.nixosModules.home-manager
     ../../modules/common
     ../../modules/nixos
+  
     {
       nixpkgs.overlays = overlays;
 
       # Hardware
       physical = true;
       networking.hostName = "roamer";
-
+  
       # Not sure what's necessary but too afraid to remove anything
       boot.initrd.availableKernelModules = [
         "nvme"
@@ -98,7 +99,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
         colors = (import ../../colorscheme/catppuccin-macchiato).dark;
         dark = true;
       };
-      wallpaper = "${inputs.wallpapers}/gruvbox/road.jpg";
+      wallpaper = "/home/malu/pics/nix-magenta.png";
       gtk.theme.name = inputs.nixpkgs.lib.mkDefault "Adwaita-dark";
 
       # Programs and services
@@ -130,6 +131,6 @@ inputs.nixpkgs.lib.nixosSystem rec {
         ryujinx.enable = false;
       };
       services.openssh.enable = true; # Required for Cloudflare tunnel and identity file
-
+    }
   ];
 }

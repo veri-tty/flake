@@ -143,7 +143,7 @@
     
   };
 
-  outputs = { self, nixpkgs, home-manager, nixvim, ... } @ inputs: {
+  outputs = { self, nixpkgs, home-manager, nixvim, ... } @ inputs: 
 
      let
       # Global configuration for my systems
@@ -160,14 +160,14 @@
       overlays = [
         inputs.nur.overlay
         inputs.nix2vim.overlay
-        (import ./overlays/neovim-plugins.nix inputs)
-        (import ./overlays/disko.nix inputs)
-        (import ./overlays/tree-sitter.nix inputs)
-        (import ./overlays/mpv-scripts.nix inputs)
-        (import ./overlays/nextcloud-apps.nix inputs)
-        (import ./overlays/betterlockscreen.nix)
-        (import ./overlays/gh-collaborators.nix inputs)
-        (import ./overlays/ren-rep.nix inputs)
+        import ./overlays/neovim-plugins.nix inputs
+        import ./overlays/disko.nix inputs
+        import ./overlays/tree-sitter.nix inputs
+        import ./overlays/mpv-scripts.nix inputs
+        import ./overlays/nextcloud-apps.nix inputs
+        import ./overlays/betterlockscreen.nix
+        import ./overlays/gh-collaborators.nix inputs
+        import ./overlays/ren-rep.nix inputs
       ];
 
 
