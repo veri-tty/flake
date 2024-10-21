@@ -13,6 +13,6 @@
     ./slack.nix
     ./wezterm.nix
     ./yt-dlp.nix
-    ./syncthing
+    ./syncthing.nix
   ];
 }

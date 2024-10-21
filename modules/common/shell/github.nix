@@ -50,7 +50,7 @@
             t2gp) organization="take-two-t2gp" ;;
             pd) organization="private-division" ;;
             dots) organization="playdots" ;;
-            *) organization="nmasur" ;;
+            *) organization="Wecantcode" ;;
         esac
 
         selected=$(gh repo list "$organization" \

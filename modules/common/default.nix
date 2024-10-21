@@ -29,7 +29,7 @@
       download = lib.mkOption {
         type = lib.types.str;
         description = "XDG directory for downloads";
-        default = if pkgs.stdenv.isDarwin then "$HOME/Downloads" else "$HOME/downloads";
+        default = if pkgs.stdenv.isDarwin then "$HOME/Downloads" else "$HOME/dl";
       };
     };
     identityFile = lib.mkOption {
@@ -65,7 +65,7 @@
     dotfilesPath = lib.mkOption {
       type = lib.types.path;
       description = "Path of dotfiles repository.";
-      default = config.homePath + "/dev/personal/dotfiles";
+      default = config.homePath + "/home/malu/projects/flake";
     };
     dotfilesRepo = lib.mkOption {
       type = lib.types.str;
@@ -150,7 +150,7 @@
 
   config =
     let
-      stateVersion = "23.05";
+      stateVersion = "24.11";
     in
     {
 

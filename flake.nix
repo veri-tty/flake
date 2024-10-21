@@ -5,6 +5,11 @@
     nixpkgs = {
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };  
+    # Used for specific stable packages
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    
+    nur.url = "github:nix-community/nur";
+
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -143,11 +148,14 @@
     
   };
 
-  outputs = { self, nixpkgs, home-manager, nixvim, ... } @ inputs: 
+  outputs = { nixpkgs, ... } @ inputs: 
 
      let
       # Global configuration for my systems
       globals =
+        let
+          baseName = "verity.rs";
+        in
         rec {
           user = "malu";
           fullName = "malu";
@@ -160,14 +168,14 @@
       overlays = [
         inputs.nur.overlay
         inputs.nix2vim.overlay
-        import ./overlays/neovim-plugins.nix inputs
-        import ./overlays/disko.nix inputs
-        import ./overlays/tree-sitter.nix inputs
-        import ./overlays/mpv-scripts.nix inputs
-        import ./overlays/nextcloud-apps.nix inputs
-        import ./overlays/betterlockscreen.nix
-        import ./overlays/gh-collaborators.nix inputs
-        import ./overlays/ren-rep.nix inputs
+        (import ./overlays/neovim-plugins.nix inputs)
+        (import ./overlays/disko.nix inputs)
+        (import ./overlays/tree-sitter.nix inputs)
+        (import ./overlays/mpv-scripts.nix inputs)
+        (import ./overlays/nextcloud-apps.nix inputs)
+        (import ./overlays/betterlockscreen.nix)
+        (import ./overlays/gh-collaborators.nix inputs)
+        (import ./overlays/ren-rep.nix inputs)
       ];
 
 
@@ -185,5 +193,133 @@
       nixosConfigurations = {
         roamer = import ./hosts/roamer { inherit inputs globals overlays; };
       };
+
+      # For quickly applying home-manager settings with:
+      # home-manager switch --flake .#tempest
+      homeConfigurations = {
+        roamer = nixosConfigurations.roamer.config.home-manager.users.${globals.user}.home;
+      };
+
+
+       packages =
+        let
+          staff =
+            system:
+            import ./hosts/staff {
+              inherit
+                inputs
+                globals
+                overlays
+                system
+                ;
+            };
+          neovim =
+            system:
+            let
+              pkgs = import nixpkgs { inherit system overlays; };
+            in
+            import ./modules/common/neovim/package {
+              inherit pkgs;
+              colors = (import ./colorscheme/gruvbox-dark).dark;
+            };
+        in
+        {
+          x86_64-linux.staff = staff "x86_64-linux";
+          x86_64-linux.arrow = inputs.nixos-generators.nixosGenerate rec {
+            system = "x86_64-linux";
+            format = "iso";
+            specialArgs = {
+              pkgs-stable = import inputs.nixpkgs-stable { inherit system; };
+              pkgs-caddy = import inputs.nixpkgs-caddy { inherit system; };
+            };
+            modules = import ./hosts/arrow/modules.nix { inherit inputs globals overlays; };
+          };
+          x86_64-linux.arrow-aws = inputs.nixos-generators.nixosGenerate rec {
+            system = "x86_64-linux";
+            format = "amazon";
+            specialArgs = {
+              pkgs-stable = import inputs.nixpkgs-stable { inherit system; };
+              pkgs-caddy = import inputs.nixpkgs-caddy { inherit system; };
+            };
+            modules = import ./hosts/arrow/modules.nix { inherit inputs globals overlays; } ++ [
+              (
+                { ... }:
+                {
+                  boot.kernelPackages = inputs.nixpkgs.legacyPackages.x86_64-linux.linuxKernel.packages.linux_6_6;
+                  amazonImage.sizeMB = 16 * 1024;
+                  permitRootLogin = "prohibit-password";
+                  boot.loader.systemd-boot.enable = inputs.nixpkgs.lib.mkForce false;
+                  boot.loader.efi.canTouchEfiVariables = inputs.nixpkgs.lib.mkForce false;
+                  services.amazon-ssm-agent.enable = true;
+                  users.users.ssm-user.extraGroups = [ "wheel" ];
+                }
+              )
+            ];
+          };
+
+          # Package Neovim config into standalone package
+          x86_64-linux.neovim = neovim "x86_64-linux";
+        };
+
+      # Programs that can be run by calling this flake
+      apps = forAllSystems (
+        system:
+        let
+          pkgs = import nixpkgs { inherit system overlays; };
+        in
+        import ./apps { inherit pkgs; }
+      );
+
+      # Development environments
+      devShells = forAllSystems (
+        system:
+        let
+          pkgs = import nixpkgs { inherit system overlays; };
+        in
+        {
+
+          # Used to run commands and edit files in this repo
+          default = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              git
+              stylua
+              nixfmt-rfc-style
+              shfmt
+              shellcheck
+            ];
+          };
+        }
+      );
+
+      checks = forAllSystems (
+        system:
+        let
+          pkgs = import nixpkgs { inherit system overlays; };
+        in
+        {
+          neovim =
+            pkgs.runCommand "neovim-check-health" { buildInputs = [ inputs.self.packages.${system}.neovim ]; }
+              ''
+                mkdir -p $out
+                export HOME=$TMPDIR
+                nvim -c "checkhealth" -c "write $out/health.log" -c "quitall"
+
+                # Check for errors inside the health log
+                if $(grep "ERROR" $out/health.log); then
+                  cat $out/health.log
+                  exit 1
+                fi
+              '';
+        }
+      );
+
+      formatter = forAllSystems (
+        system:
+        let
+          pkgs = import nixpkgs { inherit system overlays; };
+        in
+        pkgs.nixfmt-rfc-style
+      );
+
   };
 }

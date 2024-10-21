@@ -18,5 +18,6 @@
     base0D = "#8aadf4"; # Functions, Methods, Attribute IDs, Headings
     base0E = "#c6a0f6"; # Keywords, Storage, Selector, Markup Italic, Diff Changed
     base0F = "#f0c6c6"; # Deprecated, Opening/Closing Embedded Language Tags, ...
+    batTheme = "gruvbox-dark";
   };
 }

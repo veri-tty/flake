@@ -28,7 +28,7 @@
     pkgs.vimPlugins.vim-helm
     # pkgs.vimPlugins.hmts-nvim # Tree-sitter injections for home-manager
     (pkgs.vimUtils.buildVimPlugin {
-      pname = "nmasur";
+      pname = "malu";
       version = "0.1";
       src = ../plugin;
     })

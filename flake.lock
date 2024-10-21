@@ -358,6 +358,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-stable": {
+      "locked": {
+        "lastModified": 1729307008,
+        "narHash": "sha256-QUvb6epgKi9pCu9CttRQW4y5NqJ+snKr1FZpG/x3Wtc=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "a9b86fc2290b69375c5542b622088eb6eca2a7c3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-24.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixvim": {
       "inputs": {
         "devshell": "devshell",
@@ -383,6 +399,21 @@
       "original": {
         "owner": "nix-community",
         "repo": "nixvim",
+        "type": "github"
+      }
+    },
+    "nur": {
+      "locked": {
+        "lastModified": 1729525671,
+        "narHash": "sha256-/pZSi3LBtztMfOJti72FOj3OBJvsCb1N/d9Jl5L04fI=",
+        "owner": "nix-community",
+        "repo": "nur",
+        "rev": "305d127d2f03fb412de348455a3175df9e66cd04",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nur",
         "type": "github"
       }
     },
@@ -518,7 +549,9 @@
         "home-manager": "home-manager",
         "nix2vim": "nix2vim",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-stable": "nixpkgs-stable",
         "nixvim": "nixvim",
+        "nur": "nur",
         "nvim-lint-src": "nvim-lint-src",
         "nvim-lspconfig-src": "nvim-lspconfig-src",
         "nvim-tree-lua-src": "nvim-tree-lua-src",

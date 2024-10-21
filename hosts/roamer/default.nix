@@ -1,4 +1,4 @@
-# The Tempest
+# The Roamer
 # System configuration for my desktop
 
 {
@@ -18,14 +18,14 @@ inputs.nixpkgs.lib.nixosSystem rec {
     inputs.home-manager.nixosModules.home-manager
     ../../modules/common
     ../../modules/nixos
-  
+
     {
       nixpkgs.overlays = overlays;
 
       # Hardware
       physical = true;
       networking.hostName = "roamer";
-  
+
       # Not sure what's necessary but too afraid to remove anything
       boot.initrd.availableKernelModules = [
         "nvme"
@@ -48,8 +48,8 @@ inputs.nixpkgs.lib.nixosSystem rec {
         "af_alg"
         "algif_skcipher"
         "surface_aggregator"
-        "surface_aggregator_registry" 
-        "surface_aggregator_hub" 
+        "surface_aggregator_registry"
+        "surface_aggregator_hub"
         "surface_hid_core"
         "8250_dw"
         "surface_hid"
@@ -69,7 +69,6 @@ inputs.nixpkgs.lib.nixosSystem rec {
       # Allow firmware updates
       hardware.cpu.intel.updateMicrocode = true;
 
-
       # Luks-Crypt 
       boot.initrd.luks.devices."luks-df9bdee0-856b-465a-b975-ae56715d226e".device = "/dev/disk/by-uuid/df9bdee0-856b-465a-b975-ae56715d226e";
 
@@ -83,13 +82,11 @@ inputs.nixpkgs.lib.nixosSystem rec {
       fileSystems."/boot" = {
         device = "/dev/disk/by-uuid/7A9E-FA13";
         fsType = "vfat";
-        options = [ "fmask=0077" "dmask=0077" ];
+        options = [
+          "fmask=0077"
+          "dmask=0077"
+        ];
       };
-
-      swapDevices = [
-        { device = "/dev/disk/by-uuid/be3fac39-e827-42c5-8b9f-19a45a64e209"; }
-      ];
-
 
       # Turn on all features related to desktop and graphical applications
       gui.enable = true;

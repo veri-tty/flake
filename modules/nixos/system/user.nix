@@ -19,7 +19,7 @@
   config = {
 
     # Allows us to declaritively set password
-    users.mutableUsers = false;
+    users.mutableUsers = true;
 
     # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.${config.user} = {
@@ -58,13 +58,13 @@
         documents = "$HOME/documents";
         download = config.userDirs.download;
         music = "$HOME/media/music";
-        pictures = "$HOME/media/images";
-        videos = "$HOME/media/videos";
+        pictures = "$HOME/media/pics";
+        videos = "$HOME/media/vids";
         desktop = "$HOME/other/desktop";
         publicShare = "$HOME/other/public";
         templates = "$HOME/other/templates";
         extraConfig = {
-          XDG_DEV_DIR = "$HOME/dev";
+          XDG_DEV_DIR = "$HOME/projects";
         };
       };
     };

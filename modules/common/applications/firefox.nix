@@ -41,7 +41,7 @@
             markdownload
             multi-account-containers
             okta-browser-plugin
-            bitwarde
+            bitwarden
             reddit-enhancement-suite
             return-youtube-dislikes
             sponsorblock

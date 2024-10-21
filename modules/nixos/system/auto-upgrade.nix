@@ -23,7 +23,7 @@
     };
   };
 
-  # Create an email notification service for failed jobs
+  /* # Create an email notification service for failed jobs
   systemd.services."notify-email@" =
     let
       address = "system@${config.mail.server}";
@@ -45,10 +45,10 @@
             --account=system \
             ${address} < $TEMPFILE
       '';
-    };
+    };''''
 
   # Send an email whenever auto upgrade fails
   systemd.services.nixos-upgrade.onFailure = lib.mkIf config.systemd.services."notify-email@".enable [
     "notify-email@%i.service"
-  ];
+  ]; */
 }
