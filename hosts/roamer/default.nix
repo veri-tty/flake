@@ -70,23 +70,26 @@ inputs.nixpkgs.lib.nixosSystem rec {
       hardware.cpu.intel.updateMicrocode = true;
 
       # Luks-Crypt 
-      boot.initrd.luks.devices."luks-df9bdee0-856b-465a-b975-ae56715d226e".device = "/dev/disk/by-uuid/df9bdee0-856b-465a-b975-ae56715d226e";
+      boot.initrd.luks.devices."cryptroot".device = "/dev/nvme0n1p1";
 
       # This is the root filesystem containing NixOS
       fileSystems."/" = {
-        device = "/dev/disk/by-uuid/6469d818-5cb2-4387-8aa1-f16e02856b3d";
+        device = "/dev/vg0/root";
         fsType = "ext4";
       };
 
       # Grub or some shit
       fileSystems."/boot" = {
-        device = "/dev/disk/by-uuid/7A9E-FA13";
+        device = "/dev/disk/by-label/boot";
         fsType = "vfat";
         options = [
           "fmask=0077"
           "dmask=0077"
         ];
       };
+      swapDevices = [
+        { device = "/dev/vg0/swap"; }
+      ];
 
       # Turn on all features related to desktop and graphical applications
       gui.enable = true;
