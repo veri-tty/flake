@@ -20,7 +20,7 @@
               "Missing required parameter." \
               "Usage: installer -- <disk> <host>" \
               "Example: installer -- nvme0n1 tempest" \
-              "Flake example: nix run github:nmasur/dotfiles#installer -- nvme0n1 tempest"
+              "Flake example: nix run github:nmasur/veri-tty/flake -- nvme0n1 tempest"
           echo "(exiting)"
           exit 1
       fi
@@ -34,7 +34,7 @@
           --default=false
 
       ${pkgs.parted}/bin/parted /dev/''${DISK} -- mklabel gpt
-      ${pkgs.parted}/bin/parted /dev/''${DISK} -- mkpart primary 512MiB 100%
+      ${pkgs.parted}/bin/parted /dev/''${DISK} -- mkpart primary 512MiB 100% 
       ${pkgs.parted}/bin/parted /dev/''${DISK} -- mkpart ESP fat32 1MiB 512MiB
       ${pkgs.parted}/bin/parted /dev/''${DISK} -- set 3 esp on
 
@@ -59,7 +59,7 @@
       mount /dev/disk/by-label/boot /mnt/boot
       swapon /dev/vg0/swap
 
-      ${pkgs.nixos-install-tools}/bin/nixos-install --flake github:nmasur/dotfiles#''${FLAKE}
+      ${pkgs.nixos-install-tools}/bin/nixos-install --flake github:veri-tty/flake#''${FLAKE}
     ''
   );
 }
