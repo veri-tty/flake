@@ -262,13 +262,13 @@
         };
 
       # Programs that can be run by calling this flake
-      apps = forAllSystems (
-        system:
-        let
-          pkgs = import nixpkgs { inherit system overlays; };
-        in
-        import ./apps { inherit pkgs; }
-      );
+      #apps = forAllSystems (
+      #  system:
+      #  let
+      #    pkgs = import nixpkgs { inherit system overlays; };
+      #  in
+      #  import ./apps { inherit pkgs; }
+      #);
 
       # Development environments
       devShells = forAllSystems (
@@ -320,49 +320,6 @@
       #  in
       #  import ./apps { inherit pkgs; }
       #);
-
-      # Development environments
-      devShells = forAllSystems (
-        system:
-        let
-          pkgs = import nixpkgs { inherit system overlays; };
-        in
-        {
-
-          # Used to run commands and edit files in this repo
-          default = pkgs.mkShell {
-            buildInputs = with pkgs; [
-              git
-              stylua
-              nixfmt-rfc-style
-              shfmt
-              shellcheck
-            ];
-          };
-        }
-      );
-
-      checks = forAllSystems (
-        system:
-        let
-          pkgs = import nixpkgs { inherit system overlays; };
-        in
-        {
-          neovim =
-            pkgs.runCommand "neovim-check-health" { buildInputs = [ inputs.self.packages.${system}.neovim ]; }
-              ''
-                mkdir -p $out
-                export HOME=$TMPDIR
-                nvim -c "checkhealth" -c "write $out/health.log" -c "quitall"
-
-                # Check for errors inside the health log
-                if $(grep "ERROR" $out/health.log); then
-                  cat $out/health.log
-                  exit 1
-                fi
-              '';
-        }
-      );
 
       formatter = forAllSystems (
         system:
