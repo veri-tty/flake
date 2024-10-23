@@ -37,12 +37,27 @@
       ${pkgs.parted}/bin/parted /dev/''${DISK} -- mkpart primary 512MiB 100%
       ${pkgs.parted}/bin/parted /dev/''${DISK} -- mkpart ESP fat32 1MiB 512MiB
       ${pkgs.parted}/bin/parted /dev/''${DISK} -- set 3 esp on
-      mkfs.ext4 -L nixos /dev/''${DISK}''${PARTITION_PREFIX}1
-      mkfs.fat -F 32 -n boot /dev/''${DISK}''${PARTITION_PREFIX}2
 
-      mount /dev/disk/by-label/nixos /mnt
+      # Set up LUKS encryption
+      cryptsetup luksFormat /dev/''${DISK}''${PARTITION_PREFIX}1
+      cryptsetup open /dev/''${DISK}''${PARTITION_PREFIX}1 cryptroot
+
+      # Set up LVM inside the LUKS container
+      pvcreate /dev/mapper/cryptroot
+      vgcreate vg0 /dev/mapper/cryptroot
+      lvcreate -L 8G vg0 -n swap
+      lvcreate -l 100%FREE vg0 -n root
+
+      # Format the LVM partitions
+      mkfs.ext4 /dev/vg0/root
+      mkfs.fat -F 32 -n boot /dev/''${DISK}''${PARTITION_PREFIX}2
+      mkswap /dev/vg0/swap
+
+      # Mount the filesystems
+      mount /dev/vg0/root /mnt
       mkdir --parents /mnt/boot
       mount /dev/disk/by-label/boot /mnt/boot
+      swapon /dev/vg0/swap
 
       ${pkgs.nixos-install-tools}/bin/nixos-install --flake github:nmasur/dotfiles#''${FLAKE}
     ''
