@@ -4,10 +4,10 @@
   inputs = {
     nixpkgs = {
       url = "github:NixOS/nixpkgs/nixos-unstable";
-    };  
+    };
     # Used for specific stable packages
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
-    
+
     nur.url = "github:nix-community/nur";
 
     home-manager = {
@@ -18,7 +18,6 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
 
     # Convert Nix to Neovim config
     nix2vim = {
@@ -145,12 +144,13 @@
       url = "github:katiem0/gh-collaborators";
       flake = false;
     };
-    
+
   };
 
-  outputs = { nixpkgs, ... } @ inputs: 
+  outputs =
+    { nixpkgs, ... }@inputs:
 
-     let
+    let
       # Global configuration for my systems
       globals =
         let
@@ -162,8 +162,8 @@
           gitName = "veri-tty";
           gitEmail = "verity@cock.li";
           dotfilesRepo = "https://github.com/veri-tty/flake";
+          dotfilesPath = "/home/malu/projects/flake";
         };
-
 
       overlays = [
         inputs.nur.overlay
@@ -178,13 +178,12 @@
         (import ./overlays/ren-rep.nix inputs)
       ];
 
-
       supportedSystems = [
         "x86_64-linux"
       ];
-    
-    # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
-    forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+
+      # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
+      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
     in
     rec {
 
@@ -200,8 +199,7 @@
         roamer = nixosConfigurations.roamer.config.home-manager.users.${globals.user}.home;
       };
 
-
-       packages =
+      packages =
         let
           staff =
             system:
@@ -329,5 +327,5 @@
         pkgs.nixfmt-rfc-style
       );
 
-  };
+    };
 }
