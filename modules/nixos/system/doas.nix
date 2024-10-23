@@ -37,9 +37,9 @@
     home-manager.users.${config.user}.programs = {
 
       # Alias sudo to doas for convenience
-      fish.shellAliases = {
-        sudo = "doas";
-      };
+      # fish.shellAliases = {
+      #        sudo = "doas";
+      #};
 
       # Disable overriding our sudo alias with a TERMINFO alias
       kitty.settings.shell_integration = "no-sudo";

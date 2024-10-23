@@ -99,7 +99,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
         colors = (import ../../colorscheme/catppuccin-macchiato).dark;
         dark = true;
       };
-      wallpaper = "/home/malu/pics/nix-magenta.png";
+      wallpaper = "/home/malu/media/pics/nixos-catppuccin-m.png";
       gtk.theme.name = inputs.nixpkgs.lib.mkDefault "Adwaita-dark";
 
       # Programs and services
