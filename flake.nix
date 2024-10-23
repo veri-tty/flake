@@ -313,13 +313,13 @@
         }
       );
       # Programs that can be run by calling this flake
-      apps = forAllSystems (
-        system:
-        let
-          pkgs = import nixpkgs { inherit system overlays; };
-        in
-        import ./apps { inherit pkgs; }
-      );
+      #apps = forAllSystems (
+      #  system:
+      #  let
+      #    pkgs = import nixpkgs { inherit system overlays; };
+      #  in
+      #  import ./apps { inherit pkgs; }
+      #);
 
       # Development environments
       devShells = forAllSystems (
