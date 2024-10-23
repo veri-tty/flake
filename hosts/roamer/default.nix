@@ -70,7 +70,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
       hardware.cpu.intel.updateMicrocode = true;
 
       # Luks-Crypt 
-      boot.initrd.luks.devices."cryptroot".device = "/dev/nvme0n1p1";
+      boot.initrd.luks.devices."cryptroot".device = "/dev/nvme0n1p2";
 
       # This is the root filesystem containing NixOS
       fileSystems."/" = {
