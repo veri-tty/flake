@@ -13,7 +13,7 @@
     security = {
 
       # Remove sudo
-      sudo.enable = false;
+      sudo.enable = true;
 
       # Add doas
       doas = {
