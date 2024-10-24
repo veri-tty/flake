@@ -1,6 +1,0 @@
-@import "common.rasi"
-
-#window {
-  width: 980px;
-  height: 230px;
-}
