@@ -29,7 +29,6 @@ nixpkgs.lib.nixosSystem {
     nur.nixosModules.nur
 
     ## Applying recommended hardware settings
-    #nixos-hardware.nixosModules.dell-latitude-7430
     nixos-hardware.nixosModules.common-cpu-intel
     nixos-hardware.nixosModules.common-pc-laptop
     nixos-hardware.nixosModules.common-pc-ssd 
@@ -42,7 +41,6 @@ nixpkgs.lib.nixosSystem {
     ({ lib, config, pkgs, ... }: {
       ## networking
       networking.hostName = "roamer";
-      networking.interfaces.wlp0s20f3.useDHCP = true; # WiFi
 
       ## kernel
       boot.initrd.kernelModules = [ "vmd" ];
