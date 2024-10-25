@@ -6,12 +6,12 @@
     home-manager.users.${config.user} = {
       programs.thunderbird = {
         enable = true;
-        # profiles = {
-        #   work = {
-        #     isDefault = true;
-        #     withExternalGnupg = true;
-        #   };
-        # };
+         profiles = {
+           work = {
+             isDefault = true;
+             withExternalGnupg = true;
+           };
+         };
         settings = {
           "mail.identity.default.is_gnupg_key_id" = true;
           "mail.identity.default.last_entered_external_gnupg_key_id" = "${config.const.signingKey}";
