@@ -43,7 +43,7 @@
         repo = lib.mkOption {
           type = lib.types.str;
           description = "URL of the dotfiles repo";
-          default = "git@github.com:minikN/nix.git";
+          default = "git@github.com:veri-tty/flake.git";
         };
       };
     };
