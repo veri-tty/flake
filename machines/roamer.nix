@@ -1,110 +1,108 @@
-# roamer
-# System configuration for my surface laptop 3
-
-{
-  inputs,
-  globals,
-  ...
-}:
 
 
-inputs.nixpkgs.lib.nixosSystem rec {
- 
+{ inputs, globals, overlays, ... }:
+
+with inputs;
+
+nixpkgs.lib.nixosSystem {
+
+  ## Setting system architecture.
+  system = "x86_64-linux";
+
+  ## Modules
+  ##
+  ## It takes an array of modules.
   modules = [
+
+    ## Passing our recursive list will set the variables it contains
+    ## config-wide as long as we declare them as options using `mkOption'.
     globals
-    inputs.home-manager.nixosModules.home-manager
-    ../../modules/dev
-    ../../modules/gaming
-    #../../modules/sway
-    ../../modules/system
+
+    ## This module will return a `home-manager' object that can be used
+    ## in other modules (including this one).
+    home-manager.nixosModules.home-manager {
+      nixpkgs.overlays = overlays;
+    }
+
+    ## This module will return a `nur' object that can be used to access
+    ## NUR packages.
+    nur.nixosModules.nur
+
+    ## Applying recommended hardware settings
+    #nixos-hardware.nixosModules.dell-latitude-7430
+    nixos-hardware.nixosModules.common-cpu-intel
+    nixos-hardware.nixosModules.common-pc-laptop
+    nixos-hardware.nixosModules.common-pc-ssd 
   ];
-  
-  gui.enable = true;
-  development.enable = true;
-  chromium.enable = true;
-  gaming = {
-    enable = true;
-    dwarf-fortress.enable = true;
-  };
+    ## System specific
+    ##
+    ## Closure that returns the module containing configuration specific
+    ## to this machine. In order to make it a function we need to wrap it
+    ## in ().
+    ({ lib, config, pkgs, ... }: {
+      ## networking
+      networking.hostName = "roamer";
+      networking.interfaces.wlp0s20f3.useDHCP = true; # WiFi
 
-  require = [ 
-    inputs.hardware.nixosModules.common-cpu-intel
-    inputs.hardware.nixosModules.common-pc-laptop
-    inputs.hardware.nixosModules.common-pc-ssd 
-  ];
+      ## kernel
+      boot.initrd.kernelModules = [ "vmd" ];
+      boot.initrd.availableKernelModules = [
+        "xhci_pci" "thunderbolt" "vmd"
+        "nvme" "usb_storage" "sd_mod"
+      ];
+      
+      boot.kernelModules = [ "kvm-intel" ];
+      boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest;
+      
+      hardware.enableRedistributableFirmware = true;
+      hardware.cpu.intel.updateMicrocode = true;
 
+      hardware.opengl = {
+       extraPackages = with pkgs; [
+         intel-media-driver # LIBVA_DRIVER_NAME=iHD
+         vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+         vaapiVdpau
+         libvdpau-va-gl
+       ];
+      };
 
-  # Hardware
-  physical = true;
-  networking.hostName = "roamer";
-  boot.initrd.availableKernelModules = [
-    "nvme"
-    "xhci_pci"
-    "usb_storage"
-    "sd_mod"
-    ];
-    boot.initrd.luks.cryptoModules = [
-    "aes"
-    "aes_generic"
-    "blowfish"
-    "twofish"
-    "serpent"
-    "cbc"
-    "xts"
-    "lrw"
-    "sha1"
-    "sha256"
-    "sha512"
-    "af_alg"
-    "algif_skcipher"
-    # neccisary due to sl3 specific hardware fuckups with encryption https://github.com/linux-surface/linux-surface/wiki/Disk-Encryption
-    "surface_aggregator"
-    "surface_aggregator_registry"
-    "surface_aggregator_hub"
-    "surface_hid_core"
-    "8250_dw"
-    "surface_hid"
-    "intel_lpss"
-    "intel_lpss_pci"
-    "pinctrl_icelake"
-    ];
+      ## Declaring this machine to be a laptop
+      os.machine.isLaptop = true;
 
-    # Gimme that spyware
-    nixpkgs.config.allowUnfree = true;
+      ## Setting keymap to `de' for this machine.
+      os.keyboard.layout = "de";
+
+      ## Mail accounts in use on this machine
+      mail.work.enable = false;
+
+      console = {
+        font = "Lat2-Terminus16";
+        keyMap = config.os.keyboard.layout;
+      };
+
+      users.users.${config.user} = {
+        extraGroups = [ "wheel" "video" "input" ]; 
+        isNormalUser = true;
+      };
+    })
     
-    # Graphics and VMs
-    boot.kernelModules = [ "kvm-intel" ];
+    ## Host agnostic modules
+    ##
+    ## A list of file paths containing modules that should be used on this
+    ## machine. They are not specific to this machine and can be used on
+    ## other machines too as long as it fits their purpose.
+    ../modules/common
 
-    # Required binary blobs to boot on this machine
-    hardware.enableRedistributableFirmware = true;
+    ## Hardware specific modules
+    ../modules/hardware/backlight.nix
 
-    # Prioritize performance over efficiency
-    powerManagement.cpuFreqGovernor = "performance";
+    ## Features
+    ## Sets of modules for a specific purpose
+    ../features/development.nix
 
-    # Allow firmware updates
-    hardware.cpu.intel.updateMicrocode = true;
-
-    # Luks-Crypt 
-    boot.initrd.luks.devices."cryptroot".device = "/dev/nvme0n1p2";
-
-    # This is the root filesystem containing NixOS
-    fileSystems."/" = {
-    device = "/dev/vg0/root";
-    fsType = "ext4";
-    };
-
-    # Grub or some shit
-    fileSystems."/boot" = {
-    device = "/dev/disk/by-label/boot";
-    fsType = "vfat";
-    options = [
-      "fmask=0077"
-      "dmask=0077"
-    ];
-    };
-    swapDevices = [
-      { device = "/dev/vg0/swap"; }
-    ];
-    system.stateVersion = "24.05";
+    ## Chat
+    ../modules/chat/discord.nix
+    #../modules/chat/slack.nix
+    #../modules/chat/signal.nix
+  ];
 }
-   
