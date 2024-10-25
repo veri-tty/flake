@@ -11,9 +11,7 @@
 
 inputs.nixpkgs.lib.nixosSystem rec {
   system = "x86_64-linux";
-  specialArgs = {
-    pkgs-stable = import inputs.nixpkgs-stable { inherit system; };
-  };
+ 
   modules = [
     globals
     inputs.home-manager.nixosModules.home-manager
