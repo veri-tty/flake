@@ -8,9 +8,7 @@
 
   imports = [
     ./sway
-    ./mail
     ./neovim
-    ./programming
     ./gaming
     ./shell
   ];
