@@ -4,7 +4,6 @@
 {
   inputs,
   globals,
-  overlays,
   ...
 }:
 
