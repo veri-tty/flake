@@ -33,7 +33,7 @@ nixpkgs.lib.nixosSystem {
     nixos-hardware.nixosModules.common-cpu-intel
     nixos-hardware.nixosModules.common-pc-laptop
     nixos-hardware.nixosModules.common-pc-ssd 
-  ];
+
     ## System specific
     ##
     ## Closure that returns the module containing configuration specific
