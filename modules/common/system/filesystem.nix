@@ -29,20 +29,23 @@
 { config, lib, pkgs, ... }:
 
 {
+  # Luks-Crypt 
+  boot.initrd.luks.devices."cryptroot".device = "/dev/nvme0n1p2";
+
   ## Main partition
   fileSystems."/" = {
-    device = "/dev/disk/by-label/SYSTEM";
-    fsType = "btrfs";
+    device = "/dev/vg0/root";
+    fsType = "ext4";
   };
 
   ## Boot partition
   fileSystems."/boot" = {
-    device = "/dev/disk/by-label/BOOT";
+    device = "/dev/disk/by-label/boot";
     fsType = "vfat";
   };
 
   ## Swap partition
   swapDevices = [
-    { device = "/dev/disk/by-label/SWAP"; }
+    { device = "/dev/vg0/swap"; }
   ];
 }

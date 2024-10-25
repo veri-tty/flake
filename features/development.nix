@@ -10,7 +10,6 @@
     ../modules/browsers/firefox.nix
 
     ## IDE
-    #../modules/development/webstorm.nix
     ../modules/development/vscode.nix
     
 

@@ -53,7 +53,30 @@ nixpkgs.lib.nixosSystem {
       
       boot.kernelModules = [ "kvm-intel" ];
       boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest;
-      
+      boot.initrd.luks.cryptoModules = [
+        "aes"
+        "aes_generic"
+        "blowfish"
+        "twofish"
+        "serpent"
+        "cbc"
+        "xts"
+        "lrw"
+        "sha1"
+        "sha256"
+        "sha512"
+        "af_alg"
+        "algif_skcipher"
+        "surface_aggregator"
+        "surface_aggregator_registry"
+        "surface_aggregator_hub"
+        "surface_hid_core"
+        "8250_dw"
+        "surface_hid"
+        "intel_lpss"
+        "intel_lpss_pci"
+        "pinctrl_icelake"
+      ];
       hardware.enableRedistributableFirmware = true;
       hardware.cpu.intel.updateMicrocode = true;
 

@@ -28,9 +28,11 @@
 {
   boot.loader = {
     grub = {
-
+      
       ## Use Grub as the bootloader
       enable = true;
+
+      configurationName = "NixOS";
 
       ## Enable EFI support
       efiSupport = true;
