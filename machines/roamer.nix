@@ -76,6 +76,8 @@ nixpkgs.lib.nixosSystem {
       ## Mail accounts in use on this machine
       mail.work.enable = false;
 
+      os.output.primary.name = "eDP-1";
+
       console = {
         font = "Lat2-Terminus16";
         keyMap = config.os.keyboard.layout;

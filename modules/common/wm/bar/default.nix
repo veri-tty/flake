@@ -35,4 +35,7 @@
       };
     };
   };
+  config = {
+    os.bar = "${pkgs.waybar}/bin/waybar";
+  };
 }
