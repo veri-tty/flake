@@ -39,5 +39,5 @@
     homeConfigurations = {
       roamer = nixosConfigurations.roamer.config.home-manager.users.${globals.user}.home;
     };
-  };
+
 }
