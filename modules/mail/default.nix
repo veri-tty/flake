@@ -54,5 +54,5 @@
 
     ./clients/thunderbird.nix
   ];
-};
+}
  
