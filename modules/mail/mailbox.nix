@@ -33,7 +33,7 @@
 
       address = lib.mkOption {
         type = lib.types.str;
-        default = "db@minikn.xyz";
+        default = "verity@cock.li";
       };
 
       signature = lib.mkOption {
@@ -121,8 +121,6 @@ ${pkgs.pass}/bin/pass show Mail/mailbox.org/db@minikn.xyz | ${pkgs.coreutils}/bi
 
         ## Enable features
         msmtp.enable = true;
-        notmuch.enable = true;
-
         ## Sign emails by default
         gpg = {
           key = "${config.const.signingKey}";
@@ -185,15 +183,7 @@ ${pkgs.pass}/bin/pass show Mail/mailbox.org/db@minikn.xyz | ${pkgs.coreutils}/bi
           };
         };
       };
-
-      programs.emacs = lib.mkIf (builtins.elem "emacs" config.mail.private.clients) {
-        extraConfig = ''
-;; ~!emacs-lisp!~
-(with-eval-after-load 'db-mail
-  (add-to-list 'notmuch-fcc-dirs '("${config.mail.private.address}" . "accounts/${config.mail.private.address}/sent"))
-  (add-to-list 'notmuch-identities "${config.mail.private.address}"))
-          '';
-      };
     };
   };
 }
+

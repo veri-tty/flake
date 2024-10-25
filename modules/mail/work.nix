@@ -123,7 +123,6 @@ ${pkgs.pass}/bin/pass show Mail/apprologic.de/demis.balbach@apprologic.de | ${pk
 
         ## Enable features
         msmtp.enable = true;
-        notmuch.enable = true;
 
         ## Sign emails by default
         gpg = {
@@ -186,15 +185,6 @@ ${pkgs.pass}/bin/pass show Mail/apprologic.de/demis.balbach@apprologic.de | ${pk
             useStartTls = true;
           };
         };
-      };
-
-      programs.emacs = lib.mkIf (builtins.elem "emacs" config.mail.work.clients) {
-        extraConfig = ''
-;; ~!emacs-lisp!~
-(with-eval-after-load 'db-mail
-  (add-to-list 'notmuch-fcc-dirs '("${config.mail.work.address}" . "accounts/${config.mail.work.address}/sent"))
-  (add-to-list 'notmuch-identities "${config.mail.work.address}"))
-          '';
       };
     };
   };

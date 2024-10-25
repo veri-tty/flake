@@ -65,7 +65,8 @@ nixpkgs.lib.nixosSystem {
          libvdpau-va-gl
        ];
       };
-
+      # Enable thunderbird
+      mail.clients.thunderbird.enable = true;
       ## Declaring this machine to be a laptop
       os.machine.isLaptop = true;
 
