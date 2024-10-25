@@ -12,7 +12,7 @@
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
   };
-};
+
 
   outputs = { nixpkgs, nixos-hardware, ... }@inputs:
   let
