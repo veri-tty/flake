@@ -74,8 +74,6 @@
     ../hardware/color-temperature.nix
     ../hardware/outputs.nix
 
-    ## Emacs
-    ../development/emacs
 
     ## Mail
     ../mail

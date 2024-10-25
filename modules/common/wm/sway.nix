@@ -62,9 +62,7 @@
 exec swaymsg "workspace 3; layout tabbed;"
           '';
   
-        config = let
-          utils = import ./../../../utils.nix { inherit pkgs lib config; };
-        in {
+        config = {
 
           ## Set modifier
           modifier = "Mod4";
