@@ -86,15 +86,6 @@
     
 
     home-manager.users.${config.user} = {
-
-      # Enabling thunderbird for this profile if specified
-      programs.thunderbird = lib.mkIf (builtins.elem "thunderbird" config.mail.private.clients) {
-        profiles.private = {
-          isDefault = true;
-          withExternalGnupg = true;
-        };
-      };
-
       accounts.email.accounts.private = {
         thunderbird.enable = lib.mkIf (builtins.elem "thunderbird" config.mail.private.clients) true;
 
