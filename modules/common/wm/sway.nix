@@ -80,20 +80,7 @@ exec swaymsg "workspace 3; layout tabbed;"
             };
           };
 
-          ## Output configuration
-          ## For left/right configuration see module hardware/outputs
-        
-          ## Assigning workspaces to outputs
-          workspaceOutputAssign = [
-            { workspace = "1"; output = utils.outputs.mapAttr { attr = "id"; }; }
-            { workspace = "2"; output = utils.outputs.mapAttr { attr = "id"; left = false; }; }
-            { workspace = "3"; output = config.os.output.primary.name; }
-            { workspace = "4"; output = utils.outputs.mapAttr { attr = "id"; }; }
-            { workspace = "5"; output = utils.outputs.mapAttr { attr = "id"; }; }
-            { workspace = "6"; output = utils.outputs.mapAttr { attr = "id"; left = false; }; }
-            { workspace = "7"; output = utils.outputs.mapAttr { attr = "id"; }; }
-            { workspace = "8"; output = utils.outputs.mapAttr { attr = "id"; }; }
-          ];
+
 
           ## Fonts
           fonts = {
