@@ -21,6 +21,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
     ../../modules/dev
     ../../modules/gaming
     ../../modules/sway
+    ../../modules/system
   ];
   
   gui.enable = true;
