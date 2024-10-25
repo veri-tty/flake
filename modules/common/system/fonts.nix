@@ -85,7 +85,7 @@
       };
       packages = with pkgs; [
         (nerdfonts.override { fonts = [ "Iosevka" ]; })
-        (iosevka-bin.override { variant = "aile"; })
+        (iosevka-bin.override { variant = "Aile"; })
         (iosevka-bin.override { variant = "etoile"; })
         noto-fonts-emoji
       ];
