@@ -85,8 +85,6 @@
     mail.clients.thunderbird.enable = lib.mkIf (builtins.elem "thunderbird" config.mail.work.clients) true;
     mail.clients.thunderbird.primary = lib.mkDefault (lib.mkIf (builtins.elem "thunderbird" config.mail.work.clients) config.mail.private.address);
     
-    mail.clients.emacs.enable = lib.mkIf (builtins.elem "emacs" config.mail.work.clients) true;
-    mail.clients.emacs.primary = lib.mkDefault (lib.mkIf (builtins.elem "emacs" config.mail.work.clients) config.mail.private.address);
 
     home-manager.users.${config.user} = {
 
