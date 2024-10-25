@@ -32,7 +32,7 @@
 
     ## System configurations
     nixosConfigurations = {
-      roamer = import ./machines/roamer.nix { inherit inputs globals nixpkgs nixos-hardware overlays; };
+      roamer = import ./machines/roamer.nix { inherit inputs globals nixpkgs nixos-hardware; };
     };
 
     ## Home configurations
