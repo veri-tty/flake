@@ -39,7 +39,7 @@ nixpkgs.lib.nixosSystem {
     ## Closure that returns the module containing configuration specific
     ## to this machine. In order to make it a function we need to wrap it
     ## in ().
-    ({ lib, config, pkgs, ... }: {
+    { lib, config, pkgs, ... }: {
       ## networking
       networking.hostName = "roamer";
       networking.interfaces.wlp0s20f3.useDHCP = true; # WiFi
@@ -84,7 +84,7 @@ nixpkgs.lib.nixosSystem {
         extraGroups = [ "wheel" "video" "input" ]; 
         isNormalUser = true;
       };
-    })
+    }
     
     ## Host agnostic modules
     ##
