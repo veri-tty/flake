@@ -23,12 +23,12 @@ ${config}
   };
 
   ## Utility functions for handling outputs.
-  outputs = {
-    ## Maps the list of outputs to a specific attribute.
-    mapAttr = {left ? true, attr ? "name", outputs ? config.os.output.configs }: let
-      mappedOutputs = lib.lists.imap0 (i: output: let
-        target = if left then output.left else output.right;
-      in "${target.${attr}}");
-    in mappedOutputs outputs;
-  };
+ # outputs = {
+ #   ## Maps the list of outputs to a specific attribute.
+ #   mapAttr = {left ? true, attr ? "name", outputs ? config.os.output.configs }: let
+ #     mappedOutputs = lib.lists.imap0 (i: output: let
+ #       target = if left then output.left else output.right;
+ #     in "${target.${attr}}");
+ #   in mappedOutputs outputs;
+ # };
 }
