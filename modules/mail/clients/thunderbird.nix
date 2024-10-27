@@ -13,9 +13,9 @@
            };
          };
         settings = {
-#          "mail.identity.default.is_gnupg_key_id" = true;
- #         "mail.identity.default.last_entered_external_gnupg_key_id" = "${config.const.signingKey}";
-  #        "mail.openpgp.fetch_pubkeys_from_gnupg" = true;
+          "mail.identity.default.is_gnupg_key_id" = true;
+          "mail.identity.default.last_entered_external_gnupg_key_id" = "${config.const.signingKey}";
+          "mail.openpgp.fetch_pubkeys_from_gnupg" = true;
         };
       };
     };

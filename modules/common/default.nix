@@ -3,6 +3,7 @@
 {
   imports = [
     ./git.nix
+    ./vpn.nix
 
     # Repositories
     ../repositories/dotfiles.nix
@@ -52,6 +53,10 @@
 
     ## Mail
     ../mail
+    ../browsers/zeronet.nix
+    ../browsers/i2p.nix
+    ../browsers/mullvad-browser.nix
+    ../browsers/brave.nix
 
   ];
 
@@ -96,7 +101,7 @@
     ## Object of options that can be set throughout the configuration.
     ## Meant for options that get set by any module once, and never again.
     const = {
-      #signingKey = mkConst "F17DDB98CC3C405C";
+      signingKey = mkConst "0xB4672A9DB01CC999";
       passDir = mkConst "${config.users.users.${config.user}.home}/.local/var/lib/password-store";
       mailDir = mkConst "${config.users.users.${config.user}.home}/.local/var/lib/mail";
     };
