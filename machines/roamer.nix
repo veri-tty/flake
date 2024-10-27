@@ -86,19 +86,19 @@ nixpkgs.lib.nixosSystem {
          libvdpau-va-gl
        ];
       };
-      # Enable thunderbird
       mail.clients.thunderbird.enable = true;
-      ## Declaring this machine to be a laptop
       os.machine.isLaptop = true;
-
-      ## Setting keymap to `de' for this machine.
       os.keyboard.layout = "de";
-
-      ## Mail accounts in use on this machine
+      os.output.primary.width = "2256";
+      os.output.primary.height = "1504";
+      os.shell = "zsh";
+      wallpaper = "/home/ml/pics/wallpapers/lighthouse_catppuccin.png";
       mail.work.enable = false;
-
       os.output.primary.name = "eDP-1";
-
+      theme = {
+        colors = (import ../colorscheme/catppuccin-macchiato).dark;
+      };
+      gtk.theme.name = inputs.nixpkgs.lib.mkDefault "Adwaita-dark";
       console = {
         font = "Lat2-Terminus16";
         keyMap = config.os.keyboard.layout;

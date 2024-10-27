@@ -53,9 +53,9 @@
       xdg.userDirs = {
         enable = true;
         createDirectories = true;
-        documents = "${config.home-manager.users.${config.user}.home.homeDirectory}/Documents";
-        download = "${config.home-manager.users.${config.user}.home.homeDirectory}/Downloads";
-        pictures = "${config.home-manager.users.${config.user}.home.homeDirectory}/Pictures";
+        documents = "${config.home-manager.users.${config.user}.home.homeDirectory}/docs";
+        download = "${config.home-manager.users.${config.user}.home.homeDirectory}/dl";
+        pictures = "${config.home-manager.users.${config.user}.home.homeDirectory}/pics";
         
         ## Unused directories
         desktop = null;

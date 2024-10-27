@@ -1,28 +1,3 @@
-### NixOS Configuration
-###
-### Copyright © 2023 Demis Balbach <db@minikn.xyz>
-###
-### This file is not part of Nix/NixOS/Home Manager.
-###
-### My config is free software; you can redistribute it and/or modify it
-### under the terms of the GNU General Public License as published by
-### the Free Software Foundation; either version 3 of the License, or (at
-### your option) any later version.
-###
-### My config is distributed in the hope that it will be useful, but
-### WITHOUT ANY WARRANTY; without even the implied warranty of
-### MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-### GNU General Public License for more details.
-###
-### You should have received a copy of the GNU General Public License
-### along with my config. If not, see <http://www.gnu.org/licenses/>.
-###
-### COMMENT:
-###
-### Sway configuration
-###
-### CODE:
-
 { config, lib, pkgs, ... }:
 
 {
@@ -34,12 +9,15 @@
     ## Setting appropriate options so other modules can use them.
     os.wayland = true;
     os.wm = "sway";
+    environment.systemPackages = [
+      pkgs.swaybg
+    ];
     
     ## Sway
     home-manager.users.${config.user} = {
       wayland.windowManager.sway = {
         enable = true;
-
+	
         ## Enable XWayland
         xwayland = true;
         
@@ -57,10 +35,6 @@
           export _JAVA_AWT_WM_NOPARENTING=1
         '';
 
-        ## Enable tabbed layout on coding workspace
-          extraConfig = ''
-exec swaymsg "workspace 3; layout tabbed;"
-          '';
   
         config = {
 
@@ -86,7 +60,7 @@ exec swaymsg "workspace 3; layout tabbed;"
           };
 
           ## Terminal
-          terminal = config.os.terminal;
+          terminal = "kitty";
 
           ## Appearance
           floating.border = 2;
@@ -94,13 +68,66 @@ exec swaymsg "workspace 3; layout tabbed;"
           window.titlebar = false;
           floating.titlebar = false;
           gaps.inner = 8;
+	  gaps.outer = 2;
 
           ## Launcher
           menu = "${config.os.launcher.pkg}/bin/${config.os.launcher.name} ${config.os.launcher.args}";
 
           ## We'll start the bar through dbus
-          bars = [];
-
+	  bars = [
+            {
+              command = "waybar";
+            }
+          ];
+	  startup = [
+	    {
+	    command = "swaybg --image ${config.wallpaper}"; 
+            }
+	  ]; 
+          colors =
+              let
+                background = config.theme.colors.base00;
+                inactiveBackground = config.theme.colors.base01;
+                border = config.theme.colors.base01;
+                inactiveBorder = config.theme.colors.base01;
+                text = config.theme.colors.base07;
+                inactiveText = config.theme.colors.base04;
+                urgentBackground = config.theme.colors.base08;
+                indicator = "#00000000";
+              in
+              {
+                background = config.theme.colors.base00;
+                focused = {
+                  inherit
+                    background
+                    indicator
+                    text
+                    border
+                    ;
+                  childBorder = background;
+                };
+                focusedInactive = {
+                  inherit indicator;
+                  background = inactiveBackground;
+                  border = inactiveBorder;
+                  childBorder = inactiveBackground;
+                  text = inactiveText;
+                };
+                # placeholder = { };
+                unfocused = {
+                  inherit indicator;
+                  background = inactiveBackground;
+                  border = inactiveBorder;
+                  childBorder = inactiveBackground;
+                  text = inactiveText;
+                };
+                urgent = {
+                  inherit text indicator;
+                  background = urgentBackground;
+                  border = urgentBackground;
+                  childBorder = urgentBackground;
+                };
+              };
           ## Keybindings
           keybindings = let
             mod = config.home-manager.users.${config.user}.wayland.windowManager.sway.config.modifier;
@@ -108,12 +135,12 @@ exec swaymsg "workspace 3; layout tabbed;"
             passwordManager = config.os.passwordManager;
             screenshot = config.os.screenshot;
           in lib.mkOptionDefault {
-            "${mod}+Shift+r" = "reload";
-            "${mod}+Shift+q" = "kill";
-            "${mod}+Shift+f" = "fullscreen";
-            "${mod}+Ctrl+Space" = "focus mode_toggle";
-            "${mod}+Shift+d" = "exec ${menu}";
-            "${mod}+Shift+p" = "exec ${passwordManager}";
+            "${mod}+r" = "reload";
+            "${mod}+q" = "kill";
+            "${mod}+f" = "fullscreen";
+            "${mod}+Ctrl+f" = "focus mode_toggle";
+            "${mod}+a" = "exec ${menu}";
+            #"${mod}+Shift+p" = "exec ${passwordManager}";
             "Print" = "exec ${screenshot}/bin/screenshot";
           };
         };

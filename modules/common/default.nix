@@ -1,30 +1,3 @@
-### NixOS Configuration
-###
-### Copyright © 2023 Demis Balbach <db@minikn.xyz>
-###
-### This file is not part of Nix/NixOS/Home Manager.
-###
-### My config is free software; you can redistribute it and/or modify it
-### under the terms of the GNU General Public License as published by
-### the Free Software Foundation; either version 3 of the License, or (at
-### your option) any later version.
-###
-### My config is distributed in the hope that it will be useful, but
-### WITHOUT ANY WARRANTY; without even the implied warranty of
-### MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-### GNU General Public License for more details.
-###
-### You should have received a copy of the GNU General Public License
-### along with my config. If not, see <http://www.gnu.org/licenses/>.
-###
-### COMMENT:
-###
-### Common configuration
-### Should probably be used on all machines.
-###
-### CODE:
-
-
 { config, lib, pkgs, ... }:
 
 {
@@ -45,7 +18,7 @@
     ./scripts/screenshot.nix
 
     ## Terminal
-    ./terminal/alacritty.nix
+    ./terminal/kitty.nix
     ./shell/zsh.nix
 
     ## File manager
@@ -73,7 +46,9 @@
     ## Hardware
     ../hardware/color-temperature.nix
     ../hardware/outputs.nix
-
+ 
+    #Themesetting
+    ./wm/theme.nix
 
     ## Mail
     ../mail
@@ -94,7 +69,18 @@
       type = lib.types.str;
       description = "Primary user of the system";
     };
+    wallpaper = lib.mkOption { #defined in machine/*.nix
+      type = lib.types.str;
+      description = "seriously?";
+    };
 
+    theme = {
+      colors = lib.mkOption {
+        type = lib.types.attrs;
+        description = "Base16 color scheme.";
+        default = (import ../../colorscheme/catppuccin-macchiato).dark;
+      };
+    };
     fullName = lib.mkOption { # is defined in flake.nix
       type = lib.types.str;
       description = "Full name of the user";
@@ -110,7 +96,7 @@
     ## Object of options that can be set throughout the configuration.
     ## Meant for options that get set by any module once, and never again.
     const = {
-      signingKey = mkConst "F17DDB98CC3C405C";
+      #signingKey = mkConst "F17DDB98CC3C405C";
       passDir = mkConst "${config.users.users.${config.user}.home}/.local/var/lib/password-store";
       mailDir = mkConst "${config.users.users.${config.user}.home}/.local/var/lib/mail";
     };
@@ -122,7 +108,7 @@
         layout = lib.mkOption {
           type = lib.types.str;
           description = "Primary keyboard layout";
-          default = "us";
+          default = "de";
         };
 
         options = lib.mkOption {
@@ -233,8 +219,6 @@
               kid3 # mp3 tag editor
               mpv
               realvnc-vnc-viewer
-              gnome.gnome-system-monitor
-              gnome.file-roller
               gpgme
             ];
         }

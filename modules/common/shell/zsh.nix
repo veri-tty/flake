@@ -1,28 +1,3 @@
-### NixOS Configuration
-###
-### Copyright © 2023 Demis Balbach <db@minikn.xyz>
-###
-### This file is not part of Nix/NixOS/Home Manager.
-###
-### My config is free software; you can redistribute it and/or modify it
-### under the terms of the GNU General Public License as published by
-### the Free Software Foundation; either version 3 of the License, or (at
-### your option) any later version.
-###
-### My config is distributed in the hope that it will be useful, but
-### WITHOUT ANY WARRANTY; without even the implied warranty of
-### MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-### GNU General Public License for more details.
-###
-### You should have received a copy of the GNU General Public License
-### along with my config. If not, see <http://www.gnu.org/licenses/>.
-###
-### COMMENT:
-###
-### ZSH configuration
-###
-### CODE:
-
 { config, lib, pkgs, ... }:
 
 {
@@ -32,7 +7,7 @@
   
   config = {
     ## Set shell
-    os.shell = "zsh";
+    #os.shell = "zsh";
 
     ## Enable ZSH system wide
     programs.zsh.enable = true;
@@ -46,9 +21,20 @@
     ## Enable zsh for current user
     users.users.${config.user}.shell = pkgs.zsh;
 
-    ## ZSH configuration
-    home-manager.users.${config.user}.programs.zsh = {
+    # Add Zoxide
+    home-manager.users.${config.user} = {
+      programs.zoxide = {
       enable = true;
+      enableZshIntegration = true;
+    };
+
+    ## ZSH configuration
+      programs.zsh = {
+      enable = true;
+
+      shellAliases = {
+        rebuild = "sudo nixos-rebuild switch --flake /home/ml/projects/flake#";
+      };
 
       ## Enable some QOL features
       enableAutosuggestions = true;
@@ -101,7 +87,7 @@
 
 	echo -en "\033[6 q" # Make a cursor to be a vertical bar
       ''; 
-      
+      };
     };
   };
 }
