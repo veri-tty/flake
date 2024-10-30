@@ -37,7 +37,7 @@
     ./security/gpg.nix
     ./security/pass.nix
     ./security/tessen.nix
-    ./obsidian.nix
+    ./notetaking.nix
     ## System
     ./system/boot.nix
     ./system/filesystem.nix
