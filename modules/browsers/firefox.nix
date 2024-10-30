@@ -25,6 +25,7 @@
           # https://nur.nix-community.org/repos/rycee/
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
             don-t-fuck-with-paste
+	    linkwarden
             facebook-container
             markdownload
             multi-account-containers
