@@ -37,7 +37,7 @@
     ./security/gpg.nix
     ./security/pass.nix
     ./security/tessen.nix
-
+    ./obsidian.nix
     ## System
     ./system/boot.nix
     ./system/filesystem.nix
@@ -186,9 +186,10 @@
     ## Timezone and locales
     ##
     ## I don't travel
-    time.timeZone = "Europe/Berlin";
+    time.timeZone = "Africa/Capetown";
     i18n.defaultLocale = "en_US.UTF-8";
 
+    home-manager.backupFileExtension = "delme";
     ## Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 

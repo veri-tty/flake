@@ -1,7 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
-  
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   home-manager.users.${config.user} = {
     services.gpg-agent = {
       enable = true;
@@ -11,14 +13,14 @@
     programs = {
       ## Enable git
       git.enable = true;
-      gpg.enable = true;    
+      gpg.enable = true;
       ## Set username and email according to predefined options
       git.userName = "${config.fullName}";
       git.userEmail = "${config.mail.address}";
 
       ## Set up signing key and auto-sign commits
       git.signing.key = "${config.const.signingKey}";
-      git.signing.signByDefault = true;
+      #git.signing.signByDefault = true;
 
       ## Extra config
       git.extraConfig = {
@@ -27,9 +29,8 @@
         };
       };
       gh = {
-	enable = true;
+        enable = true;
       };
     };
   };
 }
-

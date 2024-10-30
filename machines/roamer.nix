@@ -92,7 +92,7 @@ nixpkgs.lib.nixosSystem {
       os.output.primary.width = "2256";
       os.output.primary.height = "1504";
       os.shell = "zsh";
-      wallpaper = "/home/ml/pics/wallpapers/clearday.jpg";
+      wallpaper = "/home/ml/pics/wallpapers/nix-black-4k.png";
       mail.work.enable = false;
       os.output.primary.name = "eDP-1";
       theme = {

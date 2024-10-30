@@ -1,10 +1,6 @@
 {
   description = "My NixOS configuration";
 
-  ## Inputs
-  ##
-  ## Using latest commits for both nixpkgs and home-manager
-  ## to make NixOS rolling release.
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/master";
@@ -18,7 +14,6 @@
     nixos-hardware,
     ...
   } @ inputs: let
-    ## Global variables used throughout the configuration
     globals = rec {
       user = "ml";
       fullName = "veri-tty";
