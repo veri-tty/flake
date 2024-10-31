@@ -34,12 +34,9 @@
     ./services/pipewire.nix
     ./services/bluetooth.nix
     ./services/printer.nix
-    ./services/flatpak.nix
 
     ## Security
     ./security/gpg.nix
-    ./security/pass.nix
-    ./security/tessen.nix
     ./notetaking.nix
     ## System
     ./system/boot.nix

@@ -6,7 +6,7 @@
       path = lib.mkOption {
         type = lib.types.path;
         description = "Path where the git repositories should be cloned";
-        default = "${config.home-manager.users.${config.user}.xdg.dataHome}/git";
+        default = "/home/${config.home-manager.users.${config.user}}/projects";
       };
     };
   };

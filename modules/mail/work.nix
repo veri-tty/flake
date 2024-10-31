@@ -1,31 +1,9 @@
-### NixOS Configuration
-###
-### Copyright © 2023 Demis Balbach <db@minikn.xyz>
-###
-### This file is not part of Nix/NixOS/Home Manager.
-###
-### My config is free software; you can redistribute it and/or modify it
-### under the terms of the GNU General Public License as published by
-### the Free Software Foundation; either version 3 of the License, or (at
-### your option) any later version.
-###
-### My config is distributed in the hope that it will be useful, but
-### WITHOUT ANY WARRANTY; without even the implied warranty of
-### MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-### GNU General Public License for more details.
-###
-### You should have received a copy of the GNU General Public License
-### along with my config. If not, see <http://www.gnu.org/licenses/>.
-###
-### COMMENT:
-###
-### Work mail configuration
-###
-### CODE:
-
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   ## Options related to this mail account
   options = {
     mail.work = {
@@ -40,9 +18,9 @@
         type = lib.types.lines;
         description = "Default work signature";
         default = ''
-            Mit freundlichen Grüßen / Best regards
-            Demis Balbach
-            ApproLogic GmbH
+          Mit freundlichen Grüßen / Best regards
+          Demis Balbach
+          ApproLogic GmbH
         '';
       };
 
@@ -56,7 +34,7 @@
         type = lib.types.str;
         default = "wp168.webpack.hosteurope.de";
       };
-      
+
       imap-port = lib.mkOption {
         type = lib.types.int;
         default = 993;
@@ -66,7 +44,7 @@
         type = lib.types.str;
         default = "wp168.webpack.hosteurope.de";
       };
-      
+
       smtp-port = lib.mkOption {
         type = lib.types.int;
         default = 587;
@@ -76,7 +54,6 @@
 
   ## General mail settings
   config = lib.mkIf config.mail.work.enable {
-
     ## Setting this account as primary system wide
     mail.address = lib.mkDefault config.mail.work.address;
     mail.signature = lib.mkDefault config.mail.work.signature;
@@ -84,10 +61,8 @@
     ## Enabling configurations for email clients if specified
     mail.clients.thunderbird.enable = lib.mkIf (builtins.elem "thunderbird" config.mail.work.clients) true;
     mail.clients.thunderbird.primary = lib.mkDefault (lib.mkIf (builtins.elem "thunderbird" config.mail.work.clients) config.mail.private.address);
-    
 
     home-manager.users.${config.user} = {
-
       # Enabling thunderbird for this profile if specified
       programs.thunderbird = lib.mkIf (builtins.elem "thunderbird" config.mail.work.clients) {
         profiles.work = {
@@ -113,11 +88,11 @@
 
         ## We need to expose these vars so the mbsync service knows of them
         passwordCommand = toString (pkgs.writeShellScript "get-work-password" ''
-## ~!shell!~
-export GNUPGHOME=${config.home-manager.users.${config.user}.programs.gpg.homedir}
-export PASSWORD_STORE_DIR=${config.const.passDir}
-${pkgs.pass}/bin/pass show Mail/apprologic.de/demis.balbach@apprologic.de | ${pkgs.coreutils}/bin/head -n 1
-'');
+          ## ~!shell!~
+          export GNUPGHOME=${config.home-manager.users.${config.user}.programs.gpg.homedir}
+          export PASSWORD_STORE_DIR=${config.const.passDir}
+          ${pkgs.pass}/bin/pass show Mail/apprologic.de/demis.balbach@apprologic.de | ${pkgs.coreutils}/bin/head -n 1
+        '');
 
         ## Enable features
         msmtp.enable = true;
@@ -136,32 +111,50 @@ ${pkgs.pass}/bin/pass show Mail/apprologic.de/demis.balbach@apprologic.de | ${pk
           enable = true;
           groups.work.channels = {
             inbox = {
-              extraConfig = { Create = "both"; Expunge = "both"; };
+              extraConfig = {
+                Create = "both";
+                Expunge = "both";
+              };
               farPattern = "INBOX";
               nearPattern = "inbox";
             };
             sent = {
-              extraConfig = { Create = "both"; Expunge = "both"; };
+              extraConfig = {
+                Create = "both";
+                Expunge = "both";
+              };
               farPattern = "Sent";
               nearPattern = "sent";
             };
             drafts = {
-              extraConfig = { Create = "both"; Expunge = "both"; };
+              extraConfig = {
+                Create = "both";
+                Expunge = "both";
+              };
               farPattern = "Drafts";
               nearPattern = "drafts";
             };
             trash = {
-              extraConfig = { Create = "both"; Expunge = "both"; };
+              extraConfig = {
+                Create = "both";
+                Expunge = "both";
+              };
               farPattern = "Trash";
               nearPattern = "trash";
             };
             spam = {
-              extraConfig = { Create = "both"; Expunge = "both"; };
+              extraConfig = {
+                Create = "both";
+                Expunge = "both";
+              };
               farPattern = "Spam";
               nearPattern = "spam";
             };
             archive = {
-              extraConfig = { Create = "both"; Expunge = "both"; };
+              extraConfig = {
+                Create = "both";
+                Expunge = "both";
+              };
               farPattern = "All";
               nearPattern = "archive";
             };

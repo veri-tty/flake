@@ -25,6 +25,7 @@
       "git.confirmSync" = false;
 
       "workbench.colorTheme" = "Catppuccin Macchiato";
+      "workbench.iconTheme" = "catppuccin-macchiato";
 
       ## Auto save
       "files.autoSave" = "onFocusChange";
