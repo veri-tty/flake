@@ -135,18 +135,17 @@
             lib.mkOptionDefault {
               "${mod}+r" = "reload";
               "${mod}+c" = "exec vscode";
-              "${mod}+f" = "exec firefox";
+              "${mod}+w" = "exec firefox";
               "${mod}+q" = "kill";
               "${mod}+f" = "fullscreen";
-              "${mod}+Ctrl+f" = "focus mode_toggle";
               "${mod}+a" = "exec ${menu}";
               #"${mod}+Shift+p" = "exec ${passwordManager}";
               "Print" = "exec ${screenshot}/bin/screenshot";
             };
           assigns = {
-            "1: terminal" = [{class = "^Kitty$";}];
-            "2: code" = [{class = "^VSCode$";}];
-            "3: web" = [{class = "^Firefox$";}];
+            "1: terminal" = [{class = "^kitty$";}];
+            "2: code" = [{class = "^code$";}];
+            "3: web" = [{class = "^firefox$";}];
           };
         };
       };
