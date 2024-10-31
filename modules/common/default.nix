@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
     ./git.nix
     ./vpn.nix
@@ -47,7 +50,7 @@
     ## Hardware
     ../hardware/color-temperature.nix
     ../hardware/outputs.nix
- 
+
     #Themesetting
     ./wm/theme.nix
 
@@ -57,24 +60,23 @@
     ../browsers/i2p.nix
     ../browsers/mullvad-browser.nix
     ../browsers/brave.nix
-
   ];
 
-  
   ## Global options
   ##
   ## These can be used throughout the configuration. If a value
   ## with the same name has been declared in `globals', its
   ## value will be set as default for the respective option.
   options = let
-    mkConst = const: (lib.mkOption { default = const; });
-   in {
-
-    user = lib.mkOption { # is defined in flake.nix
+    mkConst = const: (lib.mkOption {default = const;});
+  in {
+    user = lib.mkOption {
+      # is defined in flake.nix
       type = lib.types.str;
       description = "Primary user of the system";
     };
-    wallpaper = lib.mkOption { #defined in machine/*.nix
+    wallpaper = lib.mkOption {
+      #defined in machine/*.nix
       type = lib.types.str;
       description = "seriously?";
     };
@@ -86,12 +88,14 @@
         default = (import ../../colorscheme/catppuccin-macchiato).dark;
       };
     };
-    fullName = lib.mkOption { # is defined in flake.nix
+    fullName = lib.mkOption {
+      # is defined in flake.nix
       type = lib.types.str;
       description = "Full name of the user";
     };
-    
-    stateVersion = lib.mkOption { # is defined in flake.nix
+
+    stateVersion = lib.mkOption {
+      # is defined in flake.nix
       type = lib.types.str;
       description = "State version of nixos and home-manager";
     };
@@ -159,7 +163,6 @@
   ## extracted into their own module.
   config = {
     nix = {
-
       ## Enabling flakes
       extraOptions = ''
         experimental-features = nix-command flakes
@@ -186,7 +189,7 @@
     ## Timezone and locales
     ##
     ## I don't travel
-    time.timeZone = "Africa/Capetown";
+    time.timeZone = "Europe/Berlin";
     i18n.defaultLocale = "en_US.UTF-8";
 
     home-manager.backupFileExtension = "delme";
@@ -198,12 +201,12 @@
       NIXOS_OZONE_WL = "1";
       GTK_USE_PORTAL = "1";
     };
-	
+
     ## Global packages
     ##
     ## Packages should be managed with home-manager whereever
     ## possible. Only use a set of barebones applications here.
-    environment.systemPackages = with pkgs; [ git vim wget curl ];
+    environment.systemPackages = with pkgs; [git vim wget curl];
 
     ## Home manager settings
     home-manager.useGlobalPkgs = true;
@@ -211,7 +214,6 @@
 
     ## Setting the `stateVersion' for both home-manager and system.
     home-manager.users.${config.user} = {
-
       home = lib.mkMerge [
         {
           ## Setting state version for home-manager
@@ -219,17 +221,16 @@
 
           ## Global home packages
           packages = with pkgs; [
-              libnotify
-              unzip
-              mediaelch
-              kid3 # mp3 tag editor
-              mpv
-              realvnc-vnc-viewer
-              gpgme
-            ];
+            libnotify
+            unzip
+            mediaelch
+            kid3 # mp3 tag editor
+            mpv
+            realvnc-vnc-viewer
+            gpgme
+          ];
         }
         (lib.mkIf config.os.wayland {
-
           ## Wayland specific packages
           packages = with pkgs; [
             wl-clipboard
@@ -241,9 +242,7 @@
       ];
     };
 
-
     ## Setting state version for system
     system.stateVersion = "${config.stateVersion}";
   };
 }
-

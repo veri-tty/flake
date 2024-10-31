@@ -22,17 +22,18 @@
 ### tessen configuration
 ###
 ### CODE:
-
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   config = {
-
     ## Informing nix about the current password manager
     os.passwordManager = "${pkgs.tessen}/bin/tessen";
 
     home-manager.users.${config.user} = {
-      home.packages = [ pkgs.tessen ];
+      home.packages = [pkgs.tessen];
 
       ## Writing tessen's config file
       ## The use of 'launcher` makes tessen work with every launcher
@@ -44,4 +45,3 @@
     };
   };
 }
-
