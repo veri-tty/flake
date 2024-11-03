@@ -38,7 +38,7 @@
         enable = true;
 
         shellAliases = {
-          rebuild = "rm ~/.config/mimeapps.list && sudo nixos-rebuild switch --flake /home/ml/projects/flake#";
+          rebuild = "sudo nixos-rebuild switch --flake /home/ml/projects/flake#";
         };
 
         ## Enable some QOL features

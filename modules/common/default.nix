@@ -34,6 +34,7 @@
     ./services/pipewire.nix
     ./services/bluetooth.nix
     ./services/printer.nix
+    ./services/syncthing.nix
 
     ## Security
     ./security/gpg.nix

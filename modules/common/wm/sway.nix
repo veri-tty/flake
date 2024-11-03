@@ -134,7 +134,7 @@
           in
             lib.mkOptionDefault {
               "${mod}+r" = "reload";
-              "${mod}+c" = "exec vscode";
+              "${mod}+c" = "exec code";
               "${mod}+w" = "exec firefox";
               "${mod}+q" = "kill";
               "${mod}+f" = "fullscreen";

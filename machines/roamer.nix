@@ -102,7 +102,7 @@ with inputs;
         os.output.primary.height = "1504";
         os.shell = "zsh";
         os.fonts.mono.regular = "Victor Mono";
-        wallpaper = "/home/ml/pics/wallpapers/nix-black-4k.png";
+        wallpaper = "/home/ml/pics/wallpapers/winter_yosemite.jpg";
         mail.work.enable = false;
         os.output.primary.name = "eDP-1";
         theme = {
