@@ -14,27 +14,17 @@
     nixos-hardware,
     ...
   } @ inputs: let
-    globals = rec {
-      user = "ml";
-      fullName = "veri-tty";
-      stateVersion = "24.05";
-    };
-
-    overlays = [
-      inputs.nur.overlay
-    ];
-
     supportedSystems = ["x86_64-linux"];
     forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
   in rec {
     ## System configurations
     nixosConfigurations = {
-      roamer = import ./machines/roamer.nix {inherit inputs globals nixpkgs nixos-hardware overlays;};
+      roamer = import ./machines/roamer.nix {inherit inputs nixpkgs nixos-hardware;};
     };
 
     ## Home configurations
     homeConfigurations = {
-      roamer = nixosConfigurations.roamer.config.home-manager.users.${globals.user}.home;
+      roamer = nixosConfigurations.roamer.config.home-manager.users.ml.home;
     };
   };
 }
