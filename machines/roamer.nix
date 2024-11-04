@@ -40,7 +40,7 @@ with inputs;
           # themeing etc.
           wallpaper = "/home/ml/pics/wallpapers/yosemite.jpg";
           theme = "catppuccin-macchiato";
-          font.mono.regular = "Victor Mono";
+          font = "Victor Mono";
           gtk.theme.name = "Catppuccin-Macchiato";
           swap.enable = true;
           luks.enable = true;

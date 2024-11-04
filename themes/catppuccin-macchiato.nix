@@ -1,5 +1,11 @@
 {
-  config.theme.colors = lib.mkIf (config.theme  == "catppuccin-macchiato") {
+  lib,
+  config,
+  ...
+}: {
+  # below causes infinite recursion for som reason
+  #config.theme.colors = lib.mkIf (config.theme == "catppuccin-macchiato") {
+  config.theme.colors = {
     base00 = "#24273a"; # Default Background
     base01 = "#1e2030"; # Lighter Background
     base02 = "#363a4f"; # Selection Background
@@ -17,4 +23,5 @@
     base0E = "#c6a0f6"; # Keywords, Storage, Selector, Markup Italic, Diff Changed
     base0F = "#f0c6c6"; # Deprecated, Opening/Closing Embedded Language Tags, ...
     batTheme = "gruvbox-dark";
+  };
 }

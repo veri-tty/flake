@@ -4,18 +4,6 @@
   lib,
   ...
 }: {
-  options = {
-    kitty = {
-      enable = lib.mkEnableOption {
-        description = "Enable Kitty.";
-        default = false;
-      };
-    };
-    config = {
-      os.terminal = "${pkgs.kitty}/bin/kitty";
-    };
-  };
-
   config = {
     # Set the Rofi-Systemd terminal for viewing logs
     # Using optionalAttrs because only available in NixOS
@@ -29,21 +17,12 @@
       # Set the Rofi terminal for running programs
       programs.rofi.terminal = lib.mkIf pkgs.stdenv.isLinux (lib.mkDefault "${pkgs.kitty}/bin/kitty");
 
-      # Display images in the terminal
-      #programs.fish.interactiveShellInit = # fish
-      #  ''
-      #    if test "$TERM" = "xterm-kitty"
-      #        alias icat="kitty +kitten icat"
-      #        alias ssh="kitty +kitten ssh"
-      #    end
-      #  '';
-
-      programs.kitty = lib.mkIf config.terminal.kitty.enable {
+      programs.kitty = lib.mkIf (config.terminal == "kitty") {
         enable = true;
         environment = {};
         extraConfig = "";
         font.size = 15;
-        font.name = config.os.font.mono.regular;
+        font.name = "${config.font}";
         theme = "Catppuccin-Macchiato";
 
         settings = {

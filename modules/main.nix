@@ -110,13 +110,10 @@
       };
     };
 
-    terminal = {
-      kitty = {
-        enable = lib.mkEnableOption {
-          description = "Enable Kitty.";
-          default = false;
-        };
-      };
+    terminal = lib.mkOption {
+      type = lib.types.str;
+      description = "Default terminal emulator";
+      default = "kitty";
     };
 
     thunderbird = {
@@ -215,7 +212,7 @@
   };
   # };
   imports = [
-    ./themes/catppuccino-macchiato.nix
+    # ../themes/catppuccin-macchiato.nix
     ./system/boot.nix
     ./system/filesystem.nix
     ./system/networking.nix
