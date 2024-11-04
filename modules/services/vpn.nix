@@ -1,13 +1,19 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   config = {
     # Conditionally enable Tailscale
-    lib.mkIf config.tailscale {
-      services.tailscale.enable = true;
+    services.tailscale = lib.mkIf config.tailscale.enable {
+      enable = true;
     };
+
     # Conditionally enable Mullvad VPN
-    lib.mkIf config.mullvad {
-      services.mullvad-vpn.enable = true;
-      services.mullvad-vpn.package = pkgs.mullvad-vpn;
+    services.mullvad-vpn = lib.mkIf config.mullvad.enable {
+      enable = true;
+      package = pkgs.mullvad-vpn;
     };
   };
 }

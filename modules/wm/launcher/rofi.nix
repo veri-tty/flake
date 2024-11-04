@@ -1,18 +1,20 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
     ../launcher
   ];
 
   config = let
-
     ## Using the correct package based on the window system
-    rofiPkg = if config.os.wayland
+    rofiPkg =
+      if config.wayland
       then pkgs.rofi-wayland
       else pkgs.rofi;
   in {
-
     ## Telling the config about the launcher
     os.launcher.pkg = rofiPkg;
     os.launcher.name = "rofi";
@@ -21,12 +23,12 @@
 
     ## Configuration
     home-manager.users.${config.user} = {
-    programs.rofi = {
+      programs.rofi = {
         enable = true;
         package = rofiPkg;
         theme = "dmenu";
         font = "${config.os.fonts.mono.light} ${builtins.toString config.os.fonts.size}";
-      
+
         extraConfig = {
           show-actions = true;
           show-icons = true;
@@ -45,4 +47,3 @@
     };
   };
 }
-

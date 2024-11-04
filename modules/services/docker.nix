@@ -4,5 +4,7 @@
   lib,
   ...
 }: {
-  services.docker.enable = true;
+  virtualisation.docker = lib.mkIf config.docker.enable {
+    enable = true;
+  };
 }

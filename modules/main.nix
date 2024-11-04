@@ -5,9 +5,7 @@
   ...
 }: {
   ## Global options, defined in machnine nix file
-  options = let
-    mkConst = const: (lib.mkOption {default = const;});
-  in {
+  options = {
     # usernames, emails and identities, usually needed on all hosts
     user = lib.mkOption {
       # is defined in flake.nix
@@ -63,6 +61,12 @@
         default = false;
       };
     };
+    wayland = {
+      enable = lib.mkEnableOption {
+        description = "Wayland or not.";
+        default = false;
+      };
+    };
     windowmanager = lib.mkOption {
       type = lib.types.str;
       description = "Window manager to use";
@@ -106,9 +110,24 @@
       };
     };
 
+    terminal = {
+      kitty = {
+        enable = lib.mkEnableOption {
+          description = "Enable Kitty.";
+          default = false;
+        };
+      };
+    };
+
     thunderbird = {
       enable = lib.mkEnableOption {
         description = "Enable Thunderbird";
+        default = false;
+      };
+    };
+    firefox = {
+      enable = lib.mkEnableOption {
+        description = "Enable Firefox";
         default = false;
       };
     };
@@ -136,92 +155,88 @@
         default = false;
       };
     };
-
-    ## Global configuration
-    ## Should only contain global settings that are not related to
-    ## any particular part of the system and could therefore be
-    ## extracted into their own module.
-    config = {
-      nix = {
-        ## Enabling flakes
-        extraOptions = ''
-          experimental-features = nix-command flakes
-          warn-dirty = false
-        '';
-
-        ## Store optimization
-        optimise.automatic = true;
-
-        ## Automatic garbage collection
-        gc = {
-          automatic = true;
-          dates = "weekly";
-          options = "--delete-older-than 7d";
-        };
-      };
-
-      ## OpenGL support
-      hardware.opengl = {
-        enable = true;
-        driSupport32Bit = true;
-      };
-
-      ## Timezone and locales
-      ## I don't travel
-      time.timeZone = "Europe/Berlin";
-      i18n.defaultLocale = "en_US.UTF-8";
-
-      home-manager.backupFileExtension = "delme";
-      ## Allow unfree packages
-      nixpkgs.config.allowUnfree = true;
-
-      ## Setting correct application settings if we're running wayland
-      environment.sessionVariables = lib.mkIf config.os.wayland {
-        NIXOS_OZONE_WL = "1";
-        GTK_USE_PORTAL = "1";
-      };
-
-      ## Global packages
-      ## Packages should be managed with home-manager whereever
-      ## possible. Only use a set of barebones applications here.
-      environment.systemPackages = with pkgs; [git vim unzip wget curl ripgrep];
-
-      ## Home manager settings
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-
-      ## Setting the `stateVersion' for both home-manager and system.
-      home-manager.users.${config.user} = {
-        home = lib.mkMerge [
-          {
-            ## Setting state version for home-manager
-            stateVersion = "${config.stateVers}";
-          }
-        ];
-      };
-      ## Setting state version for system
-      system.stateVersion = "${config.stateVers}";
-    };
   };
+  ## Global configuration
+  ## Should only contain global settings that are not related to
+  ## any particular part of the system and could therefore be
+  ## extracted into their own module.
+  config = {
+    nix = {
+      ## Enabling flakes
+      extraOptions = ''
+        experimental-features = nix-command flakes
+        warn-dirty = false
+      '';
+
+      ## Store optimization
+      optimise.automatic = true;
+
+      ## Automatic garbage collection
+      gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 7d";
+      };
+    };
+
+    ## OpenGL support
+    hardware.opengl = {
+      enable = true;
+      driSupport32Bit = true;
+    };
+
+    ## Timezone and locales
+    ## I don't travel
+    time.timeZone = "Europe/Berlin";
+    i18n.defaultLocale = "en_US.UTF-8";
+
+    home-manager.backupFileExtension = "delme";
+    ## Allow unfree packages
+    nixpkgs.config.allowUnfree = true;
+
+    ## Setting correct application settings if we're running wayland
+    environment.sessionVariables = lib.mkIf config.wayland.enable {
+      NIXOS_OZONE_WL = "1";
+    };
+
+    ## Global packages
+    ## Packages should be managed with home-manager whereever
+    ## possible. Only use a set of barebones applications here.
+    environment.systemPackages = with pkgs; [git vim unzip wget curl ripgrep];
+
+    ## Home manager settings
+    home-manager.useGlobalPkgs = true;
+    home-manager.useUserPackages = true;
+
+    ## Setting the `stateVersion' for both home-manager and system.
+    home-manager.users.${config.user}.home.stateVersion = "${config.stateVers}";
+    ## Setting state version for system
+    system.stateVersion = "${config.stateVers}";
+  };
+  # };
   imports = [
+    ./themes/catppuccino-macchiato.nix
     ./system/boot.nix
     ./system/filesystem.nix
     ./system/networking.nix
     ./system/fonts.nix
-    ./shell/${config.shell}.nix
-    ./theme/${config.theme}.nix
-    ./wm/${config.windowmanager}.nix
+    ./graphical/terminal.nix
+    ./shell/zsh.nix
+    ./wm/sway.nix
     ./utils.nix
     ./services/xdg.nix
     ./services/pipewire.nix
     ./services/vpn.nix
     ./services/syncthing.nix
-    (lib.mkIf config.isLaptop ./services/bluetooth.nix)
-    (lib.mkIf config.gui.enable ./services/pipewire.nix)
-    (lib.mkIf config.docker.enable ./services/docker.nix)
-    (lib.mkIf config.obsidian.enable ./graphical/obsidian.nix)
-    (lib.mkIf config.thunderbird.enable ./graphical/thunderbird.nix)
-    (lib.mkIf config.vscode.enable ./graphical/vscode.nix)
+    ./services/bluetooth.nix
+    ./services/pipewire.nix
+    ./services/docker.nix
+    ./graphical/notetaking.nix
+    ./graphical/thunderbird.nix
+    ./graphical/vscode.nix
     ./graphical/browsers/firefox.nix
+    # we cant have nice, clean things such as this:
+    # (lib.mkIf config.docker.enable ./services/docker.nix)
+    # because of silly infinite recursion errors :(
   ];
 }

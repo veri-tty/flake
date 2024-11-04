@@ -23,7 +23,7 @@
         ## Enable GnuPG
         enable = true;
 
-        homedir = "${config.user}/.config/gnupg";
+        homedir = "/home/${config.user}/.config/gnupg";
       };
     };
   };

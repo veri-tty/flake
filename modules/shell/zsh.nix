@@ -4,10 +4,6 @@
   pkgs,
   ...
 }: {
-  imports = [
-    ../shell
-  ];
-
   config = {
     ## Set shell
     #os.shell = "zsh";

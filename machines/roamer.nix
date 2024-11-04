@@ -31,6 +31,7 @@ with inputs;
       }: {
         config = {
           gui.enable = true;
+          wayland.enable = true;
           stateVers = "24.05";
           windowmanager = "sway";
           shell = "zsh";

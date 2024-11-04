@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  config = lib.mkIf config.thunderbird {
+  config = lib.mkIf config.vscode.enable {
     environment.systemPackages = [
       pkgs.alejandra
     ];

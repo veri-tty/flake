@@ -5,7 +5,7 @@
   ...
 }: {
   # Conditionally include LUKS configuration
-  boot.initrd.luks.devices = lib.mkIf config.enableLuks {
+  boot.initrd.luks.devices = lib.mkIf config.luks.enable {
     cryptroot = {
       device = "/dev/nvme0n1p2";
     };

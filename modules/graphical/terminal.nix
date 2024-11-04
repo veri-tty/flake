@@ -38,20 +38,14 @@
       #    end
       #  '';
 
-      programs.kitty = {
+      programs.kitty = lib.mkIf config.terminal.kitty.enable {
         enable = true;
         environment = {};
         extraConfig = "";
         font.size = 15;
-        font.name = config.os.fonts.mono.regular;
+        font.name = config.os.font.mono.regular;
         theme = "Catppuccin-Macchiato";
-        keybindings = {
-          # Use shift+enter to complete text suggestions in fish
-          "shift+enter" = "send_text all \\x1F";
 
-          # Easy fullscreen toggle (for macOS)
-          "super+f" = "toggle_fullscreen";
-        };
         settings = {
           # Scrollback
           scrollback_lines = 10000;

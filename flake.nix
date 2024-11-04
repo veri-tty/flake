@@ -14,9 +14,9 @@
     nixos-hardware,
     ...
   } @ inputs: let
-    globals = rec {
+    globals = {
       user = "ml";
-      stateVersion = "24.05";
+      stateVers = "24.05";
     };
 
     supportedSystems = ["x86_64-linux"];

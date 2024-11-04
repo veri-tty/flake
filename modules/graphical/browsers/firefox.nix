@@ -1,16 +1,19 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   config = let
     ## Choosing the correct package depending on the window system in use
-    firefoxPkg = if config.os.wayland
+    firefoxPkg =
+      if config.wayland.enable
       then pkgs.firefox-wayland
       else pkgs.firefox;
   in {
-    home-manager.users.${config.user} = {
-
+    home-manager.users.${config.user} = lib.mkIf config.firefox.enable {
       ## Setting the proper session variables for wayland
-      home.sessionVariables = lib.mkIf config.os.wayland {
+      home.sessionVariables = lib.mkIf config.wayland {
         MOZ_ENABLE_WAYLAND = "1";
       };
 
@@ -18,22 +21,22 @@
       programs.firefox = {
         enable = true;
         package = firefoxPkg;
-         profiles.default = {
+        profiles.default = {
           id = 0;
           name = "default";
           isDefault = true;
           # https://nur.nix-community.org/repos/rycee/
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
             don-t-fuck-with-paste
-	    linkwarden
+            linkwarden
             facebook-container
             markdownload
             multi-account-containers
             reddit-enhancement-suite
             return-youtube-dislikes
             sponsorblock
-	    bitwarden
- 	    stylus 
+            bitwarden
+            stylus
             ublock-origin
             ublacklist
             vimium
@@ -42,7 +45,10 @@
             "app.update.auto" = false;
             "browser.aboutConfig.showWarning" = false;
             "browser.warnOnQuit" = false;
-            "browser.quitShortcut.disabled" = if pkgs.stdenv.isLinux then true else false;
+            "browser.quitShortcut.disabled" =
+              if pkgs.stdenv.isLinux
+              then true
+              else false;
             "browser.theme.dark-private-windows" = true;
             "browser.toolbars.bookmarks.visibility" = false;
             "browser.startup.page" = 3; # Restore previous session
@@ -56,7 +62,7 @@
             "extensions.pocket.enabled" = false;
             "toolkit.legacyUserProfileCustomizations.stylesheets" = true; # Allow userChrome.css
             "layout.css.color-mix.enabled" = true;
-            "ui.systemUsesDarkTheme" = "true";
+            "ui.systemUsesDarkTheme" = true;
             "media.ffmpeg.vaapi.enabled" = true; # Enable hardware video acceleration
             "cookiebanners.ui.desktop.enabled" = true; # Reject cookie popups
             "devtools.command-button-screenshot.enabled" = true; # Scrolling screenshot of entire page
@@ -151,4 +157,3 @@
     };
   };
 }
-

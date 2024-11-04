@@ -5,10 +5,11 @@
   ...
 }: {
   ## General mail settings
-  config = lib.mkIf config.thunderbird {
-    home-manager.users.${config.user} = {
-      programs.thunderbird = {
-        enable = true;
+  home-manager.users.${config.user} = {
+    programs.thunderbird = lib.mkIf config.thunderbird.enable {
+      enable = true;
+      profiles.verity = {
+        isDefault = true;
       };
     };
   };

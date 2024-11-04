@@ -4,20 +4,6 @@
   lib,
   ...
 }: {
-  options = {
-    gtk.theme = {
-      name = lib.mkOption {
-        type = lib.types.str;
-        description = "Theme name for GTK applications";
-      };
-      package = lib.mkOption {
-        type = lib.types.package;
-        description = "Theme package for GTK applications";
-        default = pkgs.magnetic-catppuccin-gtk;
-      };
-    };
-  };
-
   config = {
     home-manager.users.${config.user} = {
       gtk = let

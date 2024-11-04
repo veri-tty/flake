@@ -5,7 +5,7 @@
   ...
 }: {
   environment.systemPackages = with pkgs;
-    lib.mkIf config.obsidian [
+    lib.mkIf config.obsidian.enable [
       obsidian
     ];
 }

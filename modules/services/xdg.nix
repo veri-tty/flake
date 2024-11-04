@@ -8,7 +8,7 @@
     ## Setting up portals
     xdg.portal = {
       enable = true;
-      wlr.enable = config.os.wayland;
+      wlr.enable = true;
       configPackages = [pkgs.xdg-desktop-portal-gtk];
     };
 
