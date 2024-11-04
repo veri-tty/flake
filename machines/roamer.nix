@@ -1,4 +1,8 @@
-{inputs, ...}:
+{
+  inputs,
+  globals,
+  ...
+}:
 with inputs;
   nixpkgs.lib.nixosSystem {
     ## Setting system architecture.
@@ -97,7 +101,6 @@ with inputs;
           ];
           hardware.enableRedistributableFirmware = true;
           hardware.cpu.intel.updateMicrocode = true;
-
           hardware.opengl = {
             extraPackages = with pkgs; [
               intel-media-driver # LIBVA_DRIVER_NAME=iHD

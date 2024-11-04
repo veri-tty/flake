@@ -14,17 +14,22 @@
     nixos-hardware,
     ...
   } @ inputs: let
+    globals = rec {
+      user = "ml";
+      stateVersion = "24.05";
+    };
+
     supportedSystems = ["x86_64-linux"];
     forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
   in rec {
     ## System configurations
     nixosConfigurations = {
-      roamer = import ./machines/roamer.nix {inherit inputs nixpkgs nixos-hardware;};
+      roamer = import ./machines/roamer.nix {inherit inputs globals nixpkgs nixos-hardware;};
     };
 
     ## Home configurations
     homeConfigurations = {
-      roamer = nixosConfigurations.roamer.config.home-manager.users.ml.home;
+      roamer = nixosConfigurations.roamer.config.home-manager.users.${globals.user}.home;
     };
   };
 }
