@@ -24,6 +24,7 @@
 
         ## No auto-sync
         "git.confirmSync" = false;
+        "git.enableSmartCommit" = true;
 
         "workbench.colorTheme" = "Catppuccin Macchiato";
         "workbench.iconTheme" = "catppuccin-macchiato";

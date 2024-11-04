@@ -137,28 +137,6 @@
       };
     };
 
-    imports = [
-      ./system/boot.nix
-      ./system/filesystem.nix
-      ./system/networking.nix
-      ./system/fonts.nix
-      ./shell/${config.shell}.nix
-      ./theme/${config.theme}.nix
-      ./wm/${config.windowmanager}.nix
-      ./utils.nix
-      ./services/xdg.nix
-      ./services/pipewire.nix
-      ./services/vpn.nix
-      ./services/syncthing.nix
-      (lib.mkIf config.isLaptop ./services/bluetooth.nix)
-      (lib.mkIf config.gui.enable ./services/pipewire.nix)
-      (lib.mkIf config.docker.enable ./services/docker.nix)
-      (lib.mkIf config.obsidian.enable ./graphical/obsidian.nix)
-      (lib.mkIf config.thunderbird.enable ./graphical/thunderbird.nix)
-      (lib.mkIf config.vscode.enable ./graphical/vscode.nix)
-      ./graphical/browsers/firefox.nix
-      (lib.mkIf config.machine.isLaptop ./system/backlight.nix)
-    ];
     ## Global configuration
     ## Should only contain global settings that are not related to
     ## any particular part of the system and could therefore be
@@ -206,7 +184,7 @@
       ## Global packages
       ## Packages should be managed with home-manager whereever
       ## possible. Only use a set of barebones applications here.
-      environment.systemPackages = with pkgs; [git vim wget curl];
+      environment.systemPackages = with pkgs; [git vim unzip wget curl ripgrep];
 
       ## Home manager settings
       home-manager.useGlobalPkgs = true;
@@ -218,17 +196,6 @@
           {
             ## Setting state version for home-manager
             stateVersion = "${config.stateVers}";
-
-            ## Global home packages
-            packages = with pkgs; [
-              libnotify
-              unzip
-              mediaelch
-              kid3 # mp3 tag editor
-              mpv
-              gpgme
-              ripgrep
-            ];
           }
         ];
       };
@@ -236,4 +203,25 @@
       system.stateVersion = "${config.stateVers}";
     };
   };
+  imports = [
+    ./system/boot.nix
+    ./system/filesystem.nix
+    ./system/networking.nix
+    ./system/fonts.nix
+    ./shell/${config.shell}.nix
+    ./theme/${config.theme}.nix
+    ./wm/${config.windowmanager}.nix
+    ./utils.nix
+    ./services/xdg.nix
+    ./services/pipewire.nix
+    ./services/vpn.nix
+    ./services/syncthing.nix
+    (lib.mkIf config.isLaptop ./services/bluetooth.nix)
+    (lib.mkIf config.gui.enable ./services/pipewire.nix)
+    (lib.mkIf config.docker.enable ./services/docker.nix)
+    (lib.mkIf config.obsidian.enable ./graphical/obsidian.nix)
+    (lib.mkIf config.thunderbird.enable ./graphical/thunderbird.nix)
+    (lib.mkIf config.vscode.enable ./graphical/vscode.nix)
+    ./graphical/browsers/firefox.nix
+  ];
 }

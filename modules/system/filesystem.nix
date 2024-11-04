@@ -4,11 +4,13 @@
   pkgs,
   ...
 }: {
-  lib.mkIf config.enableLuks {
-    # Luks-Crypt
-    boot.initrd.luks.devices."cryptroot".device = "/dev/nvme0n1p2";
+  # Conditionally include LUKS configuration
+  boot.initrd.luks.devices = lib.mkIf config.enableLuks {
+    cryptroot = {
+      device = "/dev/nvme0n1p2";
+    };
   };
-  
+
   # Main partition
   fileSystems."/" = {
     device = "/dev/vg0/root";
@@ -19,12 +21,5 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-label/boot";
     fsType = "vfat";
-  };
-
-  # Look for swap volume if configured to do so
-  lib.mkIf config.enableSwap {
-    swapDevices = [
-      { device = "/dev/vg0/swap"; }
-    ];
   };
 }
