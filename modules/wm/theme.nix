@@ -13,8 +13,8 @@
       in {
         enable = true;
         theme = {
-          name = config.gtk.theme.name;
-          package = config.gtk.theme.package;
+          name = "${config.gtk.theme.name}";
+          package = "${config.gtk.theme.package}";
         };
         gtk3.extraConfig = gtkExtraConfig;
         gtk4.extraConfig = gtkExtraConfig;

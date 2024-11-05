@@ -16,7 +16,14 @@
     fullName = lib.mkOption {
       # is defined in flake.nix
       type = lib.types.str;
-      description = "Full name of the user";
+      description = "github username";
+    };
+    mail = {
+      git = lib.mkOption {
+        # is defined in flake.nix
+        type = lib.types.str;
+        description = "email for github";
+      };
     };
 
     # system specific settings
@@ -67,6 +74,12 @@
         default = false;
       };
     };
+    nvidia = {
+      enable = lib.mkEnableOption {
+        description = "Nvidia or not.";
+        default = false;
+      };
+    };
     windowmanager = lib.mkOption {
       type = lib.types.str;
       description = "Window manager to use";
@@ -76,10 +89,12 @@
       type = lib.types.str;
       description = "should be somewhat obvious you airhead";
     };
-    theme = lib.mkOption {
-      type = lib.types.string;
-      description = "Base16 color scheme.";
-      default = "catppuccin-macchiato";
+    theme = {
+      colors = lib.mkOption {
+        type = lib.types.attrs;
+        description = "Base16 color scheme.";
+        default = import ../themes/catppuccin-macchiato.nix;
+      };
     };
     gtk.theme = {
       name = lib.mkOption {
@@ -92,10 +107,16 @@
         default = pkgs.magnetic-catppuccin-gtk;
       };
     };
-    font = lib.mkOption {
-      type = lib.types.string;
-      description = "Which font the system uses.";
-      default = "Victor Mono";
+    font = {
+      size = lib.mkOption {
+        type = lib.types.int;
+        default = 16;
+      };
+      mono = lib.mkOption {
+        type = lib.types.str;
+        description = "Default monospaced font";
+        default = "VictorMono";
+      };
     };
     shell = lib.mkOption {
       type = lib.types.string;
@@ -222,13 +243,14 @@
     ./system/boot.nix
     ./system/filesystem.nix
     ./graphical/browsers/firefox.nix
-    ./graphical/browsers/schizofox.nix
+    #./graphical/browsers/schizofox.nix
     ./system/networking.nix
-    ./system/fonts.nix
+    ./system/font.nix
     ./graphical/terminal.nix
     ./shell/zsh.nix
     ./wm/sway.nix
     ./utils.nix
+    ./git.nix
     ./services/xdg.nix
     ./services/pipewire.nix
     ./services/vpn.nix
@@ -239,7 +261,6 @@
     ./graphical/notetaking.nix
     ./graphical/thunderbird.nix
     ./graphical/vscode.nix
-    ./graphical/browsers/firefox.nix
     # we cant have nice, clean things such as this:
     # (lib.mkIf config.docker.enable ./services/docker.nix)
     # because of silly infinite recursion :(

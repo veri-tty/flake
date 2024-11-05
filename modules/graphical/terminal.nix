@@ -14,15 +14,12 @@
       };
 
     home-manager.users.${config.user} = {
-      # Set the Rofi terminal for running programs
-      programs.rofi.terminal = lib.mkIf pkgs.stdenv.isLinux (lib.mkDefault "${pkgs.kitty}/bin/kitty");
-
       programs.kitty = lib.mkIf (config.terminal == "kitty") {
         enable = true;
         environment = {};
         extraConfig = "";
         font.size = 15;
-        font.name = "${config.font}";
+        font.name = "${config.font.mono}";
         theme = "Catppuccin-Macchiato";
 
         settings = {

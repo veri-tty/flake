@@ -37,8 +37,8 @@
         "editor.detectIndentation" = false;
 
         ## Font
-        "editor.fontFamily" = "'${config.os.fonts.mono.regular}', 'monospace', monospace";
-        "editor.fontSize" = config.os.fonts.size + 2;
+        "editor.fontFamily" = "'Victor'";
+        "editor.fontSize" = config.font.size + 2;
         "editor.fontLigatures" = true;
 
         # Vim

@@ -17,7 +17,7 @@
         enable = true;
         package = rofiPkg;
         theme = "dmenu";
-        font = "${config.os.fonts.mono.light} ${builtins.toString config.os.fonts.size}";
+        font = "VictorMono ${builtins.toString config.font.size}";
 
         extraConfig = {
           show-actions = true;

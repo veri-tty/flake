@@ -10,6 +10,10 @@
       enable = true;
       wlr.enable = true;
       configPackages = [pkgs.xdg-desktop-portal-gtk];
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-wlr
+        xdg-desktop-portal-gtk
+      ];
     };
 
     ## Needed so that the user dirs get exported as env vars

@@ -7,11 +7,13 @@ with inputs;
   nixpkgs.lib.nixosSystem {
     ## Setting system architecture.
     system = "x86_64-linux";
+    specialArgs = {inherit inputs nur;};
 
     ## Modules
     ##
     ## It takes an array of modules.
     modules = [
+      nur.nixosModules.nur
       home-manager.nixosModules.home-manager
       ## Applying recommended hardware settings
       nixos-hardware.nixosModules.common-cpu-intel
@@ -29,20 +31,30 @@ with inputs;
         ...
       }: {
         config = {
+          user = "ml";
+          fullName = "veri-tty";
+          mail.git = "verity@cock.li";
           gui.enable = true;
           wayland.enable = true;
           stateVers = "24.05";
           windowmanager = "sway";
           shell = "zsh";
           machine.isLaptop = true;
+          nvidia.enable = false;
           firefox.enable = true;
           schizofox.enable = false;
           keyboard.layout = "de";
           # themeing etc.
-          wallpaper = "/home/ml/pics/wallpapers/yosemite.jpg";
-          theme = "catppuccin-macchiato";
-          font = "victor-mono";
-          gtk.theme.name = "Catppuccin-Macchiato";
+          wallpaper = "/home/ml/pics/wallpapers/yosemite.png";
+          theme.colors = import ../themes/catppuccin-macchiato.nix;
+          font = {
+            size = 16;
+            mono = "VictorMono";
+          };
+          gtk.theme = {
+            name = "Adwaita-dark";
+            package = pkgs.gnome-themes-extra;
+          };
           swap.enable = true;
           luks.enable = true;
           mullvad.enable = true;
@@ -53,7 +65,7 @@ with inputs;
           docker.enable = true;
 
           console = {
-            font = "Victor Mono";
+            font = "VictorMono";
             keyMap = config.keyboard.layout;
           };
 

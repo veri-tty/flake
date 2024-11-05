@@ -5,9 +5,6 @@
   ...
 }: {
   config = {
-    ## Set shell
-    #os.shell = "zsh";
-
     ## Enable ZSH system wide
     programs.zsh.enable = true;
 
@@ -28,13 +25,20 @@
         enable = true;
         enableZshIntegration = true;
       };
-
+      programs.bat = {
+        enable = true;
+        config = {
+          theme = config.theme.colors.batTheme;
+          pager = "less -R"; # Don't auto-exit if one screen
+        };
+      };
       ## ZSH configuration
       programs.zsh = {
         enable = true;
 
         shellAliases = {
-          rebuild = "sudo nixos-rebuild switch --flake /home/ml/projects/flake#";
+          nrs = "sudo nixos-rebuild switch --flake /home/ml/projects/flake#";
+          cat = "bat";
         };
 
         ## Enable some QOL features
