@@ -13,7 +13,6 @@ with inputs;
     ## It takes an array of modules.
     modules = [
       home-manager.nixosModules.home-manager
-      nur.nixosModules.nur
       ## Applying recommended hardware settings
       nixos-hardware.nixosModules.common-cpu-intel
       nixos-hardware.nixosModules.common-pc-laptop
@@ -36,11 +35,13 @@ with inputs;
           windowmanager = "sway";
           shell = "zsh";
           machine.isLaptop = true;
+          firefox.enable = true;
+          schizofox.enable = false;
           keyboard.layout = "de";
           # themeing etc.
           wallpaper = "/home/ml/pics/wallpapers/yosemite.jpg";
           theme = "catppuccin-macchiato";
-          font = "Victor Mono";
+          font = "victor-mono";
           gtk.theme.name = "Catppuccin-Macchiato";
           swap.enable = true;
           luks.enable = true;

@@ -6,14 +6,15 @@
 }: {
   boot.loader = {
     grub = {
-      ## Use Grub as the bootloader
       enable = true;
-      devices = ["/dev/disk/by-label/boot"];
-
-      configurationName = "NixOS";
-
-      ## Enable EFI support
+      version = 2;
+      useOSProber = false;
       efiSupport = true;
+      enableCryptodisk = true;
+      device = "nodev";
+      theme = null;
+      backgroundColor = null;
+      splashImage = null;
     };
 
     ## Allow bootloader to alter the UEFI

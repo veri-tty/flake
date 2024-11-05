@@ -4,23 +4,13 @@
   pkgs,
   ...
 }: {
-  imports = [
-    ../launcher
-  ];
-
   config = let
     ## Using the correct package based on the window system
     rofiPkg =
-      if config.wayland
+      if config.wayland.enable
       then pkgs.rofi-wayland
       else pkgs.rofi;
   in {
-    ## Telling the config about the launcher
-    os.launcher.pkg = rofiPkg;
-    os.launcher.name = "rofi";
-    os.launcher.args = "-show drun";
-    os.launcher.configFile = config.home-manager.users.${config.user}.programs.rofi.configPath;
-
     ## Configuration
     home-manager.users.${config.user} = {
       programs.rofi = {

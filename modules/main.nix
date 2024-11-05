@@ -34,9 +34,9 @@
       };
     };
 
-    swap = lib.mkEnableOption {
+    swap = {
       enable = lib.mkEnableOption {
-        description = "Enable swap";
+        description = "Swapfile?";
         default = false;
       };
     };
@@ -128,6 +128,12 @@
         default = false;
       };
     };
+    schizofox = {
+      enable = lib.mkEnableOption {
+        description = "Enable Schizofox";
+        default = false;
+      };
+    };
     obsidian = {
       enable = lib.mkEnableOption {
         description = "Enable Obsidian Notes";
@@ -215,6 +221,8 @@
     # ../themes/catppuccin-macchiato.nix
     ./system/boot.nix
     ./system/filesystem.nix
+    ./graphical/browsers/firefox.nix
+    ./graphical/browsers/schizofox.nix
     ./system/networking.nix
     ./system/fonts.nix
     ./graphical/terminal.nix
@@ -234,6 +242,6 @@
     ./graphical/browsers/firefox.nix
     # we cant have nice, clean things such as this:
     # (lib.mkIf config.docker.enable ./services/docker.nix)
-    # because of silly infinite recursion errors :(
+    # because of silly infinite recursion :(
   ];
 }
