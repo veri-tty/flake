@@ -13,7 +13,8 @@ i would say that most of these points are decently realised, but there is a lot 
 - [ ] agenix
 - [ ] cleanup and restructuring
  
-also please note that the repo is weird, has quite a few (at least partially unneccisary) abstractions and probably wont make sense to you if you havent gotten as many knocks on the head as i have
+also please note that the repo is weird, has quite a few (at least partially unneccisary) abstractions and probably wont make sense to you if you havent gotten as many knocks on the head as i have.
+
 huge shoutout to [NotaShelf](https://github.com/NotAShelf) for the help and [ryan4yin](https://github.com/ryan4yin), [minikN](https://github.com/minikN) and [nmasur](https://github.com/nmasur) for inspiration via their repos, aaaand of course all the geniuses who contribute to the nix ecosystem
 
 <3
