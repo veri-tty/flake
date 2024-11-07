@@ -42,7 +42,7 @@
         };
 
         ## Enable some QOL features
-        enableAutosuggestions = true;
+        autosuggestion.enable = true;
         enableCompletion = true;
         syntaxHighlighting.enable = true;
 

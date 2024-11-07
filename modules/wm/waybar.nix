@@ -59,16 +59,6 @@
         background: #29273a;
         color: #ffffff;
       }
-
-      #custom-logo {
-        font-size: 18px;
-        margin: 0;
-        margin-left: 7px;
-        margin-right: 12px;
-        padding: 0;
-        font-family: NotoSans Nerd Font Mono;
-      }
-
       #workspaces button {
         margin-right: 10px;
         color: #ffffff;

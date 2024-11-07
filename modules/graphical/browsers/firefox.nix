@@ -30,9 +30,9 @@
           extensions = with config.nur.repos.rycee.firefox-addons; [
             don-t-fuck-with-paste
             linkwarden
-            facebook-container
-            markdownload
-            multi-account-containers
+            #facebook-container
+            #markdownload
+            #multi-account-containers
             reddit-enhancement-suite
             return-youtube-dislikes
             sponsorblock

@@ -10,10 +10,11 @@
     ./cursor.nix
     ./theme.nix
   ];
-  config = {
+  config = lib.mkIf config.sway.enable {
     environment.systemPackages = [
       pkgs.swaybg
     ];
+    wayland.enable = true;
     home-manager.users.${config.user} = {
       wayland.windowManager.sway = {
         enable = true;

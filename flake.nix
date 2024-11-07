@@ -31,10 +31,16 @@
     nixosConfigurations = {
       roamer = import ./machines/roamer.nix {inherit inputs globals nixpkgs nixos-hardware;};
     };
+    nixosConfigurations = {
+      cathedral = import ./machines/cathedral.nix {inherit inputs globals nixpkgs nixos-hardware;};
+    };
 
     ## Home configurations
     homeConfigurations = {
       roamer = nixosConfigurations.roamer.config.home-manager.users.${globals.user}.home;
+    };
+    homeConfigurations = {
+      cathedral = nixosConfigurations.cathedral.config.home-manager.users.${globals.user}.home;
     };
   };
 }

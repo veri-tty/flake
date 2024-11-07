@@ -20,7 +20,7 @@
         extraConfig = "";
         font.size = 15;
         font.name = "${config.font.mono}";
-        theme = "Catppuccin-Macchiato";
+        themeFile = "Catppuccin-Macchiato";
 
         settings = {
           # Scrollback

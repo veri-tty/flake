@@ -38,7 +38,7 @@
 
         ## Font
         "editor.fontFamily" = "'Victor'";
-        "editor.fontSize" = config.font.size + 2;
+        "editor.fontSize" = config.font.size + 5;
         "editor.fontLigatures" = true;
 
         # Vim

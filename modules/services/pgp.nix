@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+lib.mkIf config.pgp.enable {
   home-manager.users.${config.user} = {
     services = {
       ## Enable gpg-agent with ssh support

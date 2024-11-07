@@ -1,9 +1,11 @@
 {
   pkgs,
   globals,
+  lib,
+  config,
   ...
 }: {
-  services = {
+  services = lib.mkIf config.syncthing.enable {
     syncthing = {
       enable = true;
       user = "ml";

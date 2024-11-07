@@ -25,8 +25,6 @@
         description = "email for github";
       };
     };
-
-    # system specific settings
     keyboard = {
       layout = lib.mkOption {
         type = lib.types.str;
@@ -34,6 +32,10 @@
         default = "de";
       };
     };
+
+    #
+    #
+    # system specific settings
     luks = {
       enable = lib.mkEnableOption {
         description = "Enable LUKS encryption";
@@ -60,8 +62,6 @@
       type = lib.types.str;
       description = "State version of nixos and home-manager";
     };
-
-    # window manager and theming related stuffs
     gui = {
       enable = lib.mkEnableOption {
         description = "Enable graphics.";
@@ -80,10 +80,14 @@
         default = false;
       };
     };
-    windowmanager = lib.mkOption {
-      type = lib.types.str;
-      description = "Window manager to use";
-      default = "sway";
+
+    # window manager and theming related stuffs
+
+    sway = {
+      enable = lib.mkEnableOption {
+        description = "Sway or not.";
+        default = false;
+      };
     };
     wallpaper = lib.mkOption {
       type = lib.types.str;
@@ -131,6 +135,13 @@
       };
     };
 
+    pgp = {
+      enable = lib.mkEnableOption {
+        description = "Enable PGP, Gnupgp and all that shabang";
+        default = false;
+      };
+    };
+
     terminal = lib.mkOption {
       type = lib.types.str;
       description = "Default terminal emulator";
@@ -161,6 +172,12 @@
         default = false;
       };
     };
+    syncthing = {
+      enable = lib.mkEnableOption {
+        description = "Enable Syncthing Service";
+        default = false;
+      };
+    };
     mullvad = {
       enable = lib.mkEnableOption {
         description = "Enable Mullvad VPN";
@@ -177,6 +194,28 @@
       enable = lib.mkEnableOption {
         description = "Enable Docker";
         default = false;
+      };
+    };
+
+    # well gaming related stuffs duh
+    gaming = {
+      int-fic = {
+        enable = lib.mkEnableOption {
+          description = "Whether to enable the Gargoyle Interactive Fiction Interpreter";
+          default = false;
+        };
+      };
+      wine = {
+        enable = lib.mkEnableOption {
+          description = "Whether to enable the Wine compatibility layer";
+          default = false;
+        };
+      };
+      steam = {
+        enable = lib.mkEnableOption {
+          description = "Whether to enable Steam";
+          default = false;
+        };
       };
     };
   };
@@ -204,11 +243,16 @@
     };
 
     ## OpenGL support
-    hardware.opengl = {
-      enable = true;
-      driSupport32Bit = true;
+    hardware = {
+      graphics = {
+        enable = true;
+        enable32Bit = true;
+        extraPackages = with pkgs; [
+          vaapiVdpau
+          libvdpau-va-gl
+        ];
+      };
     };
-
     ## Timezone and locales
     ## I don't travel
     time.timeZone = "Europe/Berlin";
@@ -237,32 +281,35 @@
     ## Setting state version for system
     system.stateVersion = "${config.stateVers}";
   };
-  # };
   imports = [
-    # ../themes/catppuccin-macchiato.nix
-    ./system/boot.nix
-    ./system/filesystem.nix
-    ./graphical/browsers/firefox.nix
-    #./graphical/browsers/schizofox.nix
-    ./system/networking.nix
-    ./system/font.nix
-    ./graphical/terminal.nix
-    ./shell/zsh.nix
-    ./wm/sway.nix
-    ./utils.nix
-    ./git.nix
-    ./services/xdg.nix
-    ./services/pipewire.nix
-    ./services/vpn.nix
-    ./services/syncthing.nix
-    ./services/bluetooth.nix
-    ./services/pipewire.nix
-    ./services/docker.nix
     ./graphical/notetaking.nix
+    ./graphical/terminal.nix
     ./graphical/thunderbird.nix
     ./graphical/vscode.nix
+    ./graphical/browsers/firefox.nix
+    ./graphical/browsers/schizofox.nix
+    ./graphical/gaming/interactive-fiction.nix
+    ./graphical/gaming/wine.nix
+    ./graphical/gaming/steam.nix
+    ./services/bluetooth.nix
+    ./services/docker.nix
+    ./services/pipewire.nix
+    ./services/syncthing.nix
+    ./services/vpn.nix
+    ./services/git.nix
+    ./services/pgp.nix
+    ./services/xdg.nix
+    ./shell/zsh.nix
+    ./system/boot.nix
+    ./system/filesystem.nix
+    ./system/font.nix
+    ./system/networking.nix
+    ./system/nvidia.nix
+    ./system/backlight.nix
+    ./wm/sway.nix
     # we cant have nice, clean things such as this:
     # (lib.mkIf config.docker.enable ./services/docker.nix)
     # because of silly infinite recursion :(
+    # maybe because of conditional in the imported file itself?
   ];
 }

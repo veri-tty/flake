@@ -37,19 +37,15 @@ with inputs;
           gui.enable = true;
           wayland.enable = true;
           stateVers = "24.05";
-          sway.enable = true;
+          windowmanager = "sway";
           shell = "zsh";
-          machine.isLaptop = true;
-          nvidia.enable = false;
+          machine.isLaptop = false;
+          nvidia.enable = true;
           firefox.enable = true;
           schizofox.enable = false;
           keyboard.layout = "de";
-          gaming.int-fic.enable = true;
-          gaming.wine.enable = false;
-          gaming.steam.enable = true;
-          syncthing.enable = true;
           # themeing etc.
-          wallpaper = "/home/ml/pics/wallpapers/a_winternight_in_calgary.jpg";
+          wallpaper = "/home/ml/pics/wallpapers/yosemite.png";
           theme.colors = import ../themes/catppuccin-macchiato.nix;
           font = {
             size = 16;
@@ -59,10 +55,13 @@ with inputs;
             name = "Adwaita-dark";
             package = pkgs.gnome-themes-extra;
           };
+          gaming.int-fic.enable = false;
+          gaming.wine.enable = true;
           swap.enable = true;
-          luks.enable = true;
           pgp.enable = true;
+          luks.enable = true;
           mullvad.enable = true;
+          syncthing.enable = true;
           tailscale.enable = true;
           thunderbird.enable = true;
           obsidian.enable = true;
@@ -79,7 +78,7 @@ with inputs;
             isNormalUser = true;
           };
           ## networking
-          networking.hostName = "roamer";
+          networking.hostName = "cathedral";
 
           ## kernel
           boot.initrd.kernelModules = ["vmd"];
@@ -92,34 +91,10 @@ with inputs;
             "sd_mod"
           ];
 
-          boot.kernelModules = ["kvm-intel"];
+          boot.kernelModules = ["kvm-amd"];
           boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest;
-          boot.initrd.luks.cryptoModules = [
-            "aes"
-            "aes_generic"
-            "blowfish"
-            "twofish"
-            "serpent"
-            "cbc"
-            "xts"
-            "lrw"
-            "sha1"
-            "sha256"
-            "sha512"
-            "af_alg"
-            "algif_skcipher"
-            "surface_aggregator"
-            "surface_aggregator_registry"
-            "surface_aggregator_hub"
-            "surface_hid_core"
-            "8250_dw"
-            "surface_hid"
-            "intel_lpss"
-            "intel_lpss_pci"
-            "pinctrl_icelake"
-          ];
           hardware.enableRedistributableFirmware = true;
-          hardware.cpu.intel.updateMicrocode = true;
+          hardware.cpu.amd.updateMicrocode = true;
         };
       })
 

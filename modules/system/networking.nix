@@ -19,7 +19,7 @@
   ## Configuring nm app windows to be floating
   home-manager.users.${config.user} = {
     home.packages = [pkgs.networkmanagerapplet];
-    wayland.windowManager.sway = lib.mkIf (config.windowmanager == "sway") {
+    wayland.windowManager.sway = lib.mkIf config.sway.enable {
       config.window = {
         commands = [
           {
