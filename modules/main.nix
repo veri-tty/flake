@@ -89,6 +89,12 @@
         default = false;
       };
     };
+    hyprland = {
+      enable = lib.mkEnableOption {
+	description = "Enable HyprWM";
+	default = "false";
+      };
+    };
     wallpaper = lib.mkOption {
       type = lib.types.str;
       description = "should be somewhat obvious you airhead";
@@ -307,6 +313,7 @@
     ./system/nvidia.nix
     ./system/backlight.nix
     ./wm/sway.nix
+    ./wm/hyprland.nix
     # we cant have nice, clean things such as this:
     # (lib.mkIf config.docker.enable ./services/docker.nix)
     # because of silly infinite recursion :(

@@ -38,6 +38,11 @@
               xkb_layout = config.keyboard.layout;
             };
           };
+	  output = {
+	    DP-1 = {
+	      mode = "2560x1440@143.998Hz";   
+	    };
+	  };
 
           workspaceAutoBackAndForth = true;
 

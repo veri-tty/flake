@@ -16,9 +16,11 @@ with inputs;
       nur.nixosModules.nur
       home-manager.nixosModules.home-manager
       ## Applying recommended hardware settings
-      nixos-hardware.nixosModules.common-cpu-intel
-      nixos-hardware.nixosModules.common-pc-laptop
-      nixos-hardware.nixosModules.common-pc-ssd
+      inputs.nixos-hardware.nixosModules.common-cpu-amd
+      #inputs.nixos-hardware.nixosModules.common-gpu-amd
+      #inputs.nixos-hardware.nixosModules.common-gpu-nvidia
+      inputs.nixos-hardware.nixosModules.common-pc
+      inputs.nixos-hardware.nixosModules.common-pc-ssd
 
       ## System specific
       ## Closure that returns the module containing configuration specific
@@ -37,7 +39,8 @@ with inputs;
           gui.enable = true;
           wayland.enable = true;
           stateVers = "24.05";
-          windowmanager = "sway";
+          sway.enable = true;
+          hyprland.enable = true;
           shell = "zsh";
           machine.isLaptop = false;
           nvidia.enable = true;
@@ -45,7 +48,7 @@ with inputs;
           schizofox.enable = false;
           keyboard.layout = "de";
           # themeing etc.
-          wallpaper = "/home/ml/pics/wallpapers/yosemite.png";
+          wallpaper = "/home/ml/pics/wallpapers/river_cottage.jpg";
           theme.colors = import ../themes/catppuccin-macchiato.nix;
           font = {
             size = 16;
