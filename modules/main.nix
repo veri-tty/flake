@@ -89,6 +89,12 @@
         default = false;
       };
     };
+    awesome = {
+      enable = lib.mkEnableOption {
+	description = "Enable the X11 window manager Awesome WM (its awesome tm)";
+	default = false;
+      };
+    };
     hyprland = {
       enable = lib.mkEnableOption {
 	description = "Enable HyprWM";
@@ -314,6 +320,7 @@
     ./system/backlight.nix
     ./wm/sway.nix
     ./wm/hyprland.nix
+    ./wm/awesome.nix
     # we cant have nice, clean things such as this:
     # (lib.mkIf config.docker.enable ./services/docker.nix)
     # because of silly infinite recursion :(

@@ -40,6 +40,7 @@ with inputs;
           wayland.enable = true;
           stateVers = "24.05";
           sway.enable = true;
+          awesome.enable = true;
           hyprland.enable = true;
           shell = "zsh";
           machine.isLaptop = false;
@@ -94,10 +95,16 @@ with inputs;
             "sd_mod"
           ];
 
-          boot.kernelModules = ["kvm-amd"];
+          boot.kernelModules = ["nvidia" "kvm-amd"];
+          boot.kernelParams = [
+            "video=DP-1:2560x2560@144"
+          ];
           boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest;
           hardware.enableRedistributableFirmware = true;
           hardware.cpu.amd.updateMicrocode = true;
+          services.xserver.videoDrivers = [
+            "nvidia"
+          ];
         };
       })
 

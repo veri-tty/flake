@@ -1,9 +1,9 @@
-{ pkgs, lib, config, ...}
+{ pkgs, lib, config, ...}:
 {
   services= lib.mkIf config.awesome.enable {
     xserver = {
       enable = true;
-      windowmanager.awesome = {
+      windowManager.awesome = {
 	enable = true;
 	luaModules= with pkgs.luaPackages; [
 	  luarocks
@@ -11,4 +11,10 @@
 	];
       };
     };
+    displayManager = {
+      sddm.enable = true;
+      defaultSession = "none+awesome";
+    };
+  };
+}
     
