@@ -49,7 +49,7 @@ with inputs;
           stateVers = "24.05";
           sway.enable = false;
           awesome.enable = true;
-          cosmic.enable = true;
+          cosmic.enable = false;
           hyprland.enable = true;
           shell = "zsh";
           machine.isLaptop = false;
