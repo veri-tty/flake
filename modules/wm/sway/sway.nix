@@ -5,10 +5,10 @@
   ...
 }: {
   imports = [
-    ./waybar.nix
-    ./rofi.nix
-    ./cursor.nix
-    ./theme.nix
+    #./waybar.nix
+    #./rofi.nix
+    #./cursor.nix
+    #./theme.nix
   ];
   config = lib.mkIf config.sway.enable {
     environment.systemPackages = [
