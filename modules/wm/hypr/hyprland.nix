@@ -20,22 +20,13 @@
       wayland.windowManager.hyprland = {
         enable = true;
         systemd.enable = true;
-        settings.env = [
-          # for hyprland with nvidia gpu, ref https://wiki.hyprland.org/Nvidia/
-          "LIBVA_DRIVER_NAME,nvidia"
-          "XDG_SESSION_TYPE,wayland"
-          "GBM_BACKEND,nvidia-drm"
-          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-          # fix https://github.com/hyprwm/Hyprland/issues/1520
-          "WLR_NO_HARDWARE_CURSORS,1"
-        ];
         extraConfig = ''
           env = LIBVA_DRIVER_NAME,nvidia
           env = XDG_SESSION_TYPE,wayland
           env = GBM_BACKEND,nvidia-drm
           env = __GLX_VENDOR_LIBRARY_NAME,nvidia
           env = ELECTRON_OZONE_PLATFORM_HINT,auto
-
+        cursor:no_hardware_cursors
           ################
           ### MONITORS ###
           ################
@@ -68,7 +59,7 @@
           #####################
           ### LOOK AND FEEL ###
           #####################
-
+          
           # Refer to https://wiki.hyprland.org/Configuring/Variables/
 
           # https://wiki.hyprland.org/Configuring/Variables/#general
