@@ -14,10 +14,9 @@
       extensions = [
         pkgs.vscode-extensions.kamadorueda.alejandra
         pkgs.vscode-extensions.bbenoist.nix
-        pkgs.vscode-extensions.catppuccin.catppuccin-vsc-icons
-        pkgs.vscode-extensions.catppuccin.catppuccin-vsc
         pkgs.vscode-extensions.github.copilot
         pkgs.vscode-extensions.github.copilot-chat
+        pkgs.vscode-extensions.brandonkirbyson.solarized-palenight
       ];
       userSettings = {
         "window.titleBarStyle" = "custom";
@@ -26,7 +25,7 @@
         "git.confirmSync" = false;
         "git.enableSmartCommit" = true;
 
-        "workbench.colorTheme" = "Catppuccin Macchiato";
+        "workbench.colorTheme" = "Evans Dark Theme";
         "workbench.iconTheme" = "catppuccin-macchiato";
 
         ## Auto save

@@ -6,15 +6,17 @@
 }: {
   imports = [
     #./hyprland-environment.nix
-    ./waybar.nix
-    ./rofi.nix
-    ./cursor.nix
-    ./theme.nix
+    # ./waybar.nix
+    # ./rofi.nix
+    # ./cursor.nix
+    # ./theme.nix
   ];
   config = lib.mkIf config.hyprland.enable {
     environment.systemPackages = with pkgs; [
       waybar
       swaybg
+      libva
+      nvidia-vaapi-driver
     ];
     wayland.enable = true;
     home-manager.users.${config.user} = {
@@ -40,15 +42,20 @@
       #test later systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
       wayland.windowManager.hyprland = {
         enable = true;
-        systemdIntegration = true;
+        #systemd.enable = true;
         extraConfig = ''
+          env = LIBVA_DRIVER_NAME,nvidia
+          env = XDG_SESSION_TYPE,wayland
+          env = GBM_BACKEND,nvidia-drm
+          env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+          env = ELECTRON_OZONE_PLATFORM_HINT,auto
 
           ################
           ### MONITORS ###
           ################
 
           # See https://wiki.hyprland.org/Configuring/Monitors/
-          monitor=,preferred,auto,1.6
+          monitor = DP-1, 2560x1440@144, 0x0, 1.6
 
 
           ###################
@@ -227,7 +234,7 @@
           bind = $mainMod, Q, killactive,
           bind = $mainMod, M, exit,
           bind = $mainMod, W, exec, firefox
-          bind = $mainMod, W, exec, code
+          bind = $mainMod, C, exec, code --enable-features=UseOzonePlatform --ozone-platform=wayland
           bind = $mainMod, V, togglefloating,
           bind = $mainMod, R, exec, $menu
           bind = $mainMod, P, pseudo, # dwindle

@@ -8,6 +8,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     schizofox.url = "github:schizofox/schizofox";
     nur.url = "github:nix-community/NUR";
+    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
   };
 
   outputs = {
@@ -22,6 +23,7 @@
     overlays = [
       inputs.nur.overlay
       inputs.schizofox.homeManagerModules.default
+      inputs.nixos-cosmic.nixosModules.default
     ];
 
     supportedSystems = ["x86_64-linux"];
