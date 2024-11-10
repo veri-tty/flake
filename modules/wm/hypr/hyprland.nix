@@ -5,44 +5,30 @@
   ...
 }: {
   imports = [
-    #./hyprland-environment.nix
-    # ./waybar.nix
-    # ./rofi.nix
-    # ./cursor.nix
-    # ./theme.nix
+    ./hyprpaper.nix
   ];
   config = lib.mkIf config.hyprland.enable {
     environment.systemPackages = with pkgs; [
       waybar
-      swaybg
+      hyprpaper
       libva
       nvidia-vaapi-driver
     ];
     wayland.enable = true;
     home-manager.users.${config.user} = {
-      # home = {
-      #   sessionVariables = {
-      #     EDITOR = "
-      #     vim";
-      #     BROWSER = "firefox";
-      #     TERMINAL = "kitty";
-      #     GBM_BACKEND = "nvidia-drm";
-      #     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      #     LIBVA_DRIVER_NAME = "nvidia"; # hardware acceleration
-      #     __GL_VRR_ALLOWED = "1";
-      #     WLR_NO_HARDWARE_CURSORS = "1";
-      #     WLR_RENDERER_ALLOW_SOFTWARE = "1";
-      #     CLUTTER_BACKEND = "wayland";
-      #     #WLR_RENDERER = "vulkan";
-      #     XDG_CURRENT_DESKTOP = "Hyprland";
-      #     XDG_SESSION_DESKTOP = "Hyprland";
-      #     XDG_SESSION_TYPE = "wayland";
-      #   };
-      # };
       #test later systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
       wayland.windowManager.hyprland = {
         enable = true;
-        #systemd.enable = true;
+        systemd.enable = true;
+        settings.env = [
+          # for hyprland with nvidia gpu, ref https://wiki.hyprland.org/Nvidia/
+          "LIBVA_DRIVER_NAME,nvidia"
+          "XDG_SESSION_TYPE,wayland"
+          "GBM_BACKEND,nvidia-drm"
+          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+          # fix https://github.com/hyprwm/Hyprland/issues/1520
+          "WLR_NO_HARDWARE_CURSORS,1"
+        ];
         extraConfig = ''
           env = LIBVA_DRIVER_NAME,nvidia
           env = XDG_SESSION_TYPE,wayland
@@ -69,9 +55,6 @@
           $fileManager = dolphin
           $menu = rofi --show drun
 
-           exec-once = swaybg -i ${config.wallpaper}
-
-
           #############################
           ### ENVIRONMENT VARIABLES ###
           #############################
@@ -91,7 +74,7 @@
           # https://wiki.hyprland.org/Configuring/Variables/#general
           general {
               gaps_in = 5
-              gaps_out = 20
+              gaps_out = 10
 
               border_size = 2
 
@@ -110,7 +93,7 @@
 
           # https://wiki.hyprland.org/Configuring/Variables/#decoration
           decoration {
-              rounding = 10
+              rounding = 0
 
               # Change transparency of focused and unfocused windows
               active_opacity = 1.0
@@ -129,7 +112,7 @@
 
           # https://wiki.hyprland.org/Configuring/Variables/#animations
           animations {
-              enabled = yes, please :)
+              enabled = no #, please :)
 
               # Default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
 

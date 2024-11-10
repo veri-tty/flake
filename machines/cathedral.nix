@@ -45,6 +45,7 @@ with inputs;
           awesome.enable = true;
           cosmic.enable = false;
           hyprland.enable = true;
+          plasma-6.enable = false;
           shell = "zsh";
           machine.isLaptop = false;
           nvidia.enable = true;
@@ -52,8 +53,8 @@ with inputs;
           schizofox.enable = false;
           keyboard.layout = "de";
           # themeing etc.
-          wallpaper = "/home/ml/pics/wallpapers/river_cottage.jpg";
-          theme.colors = import ../themes/catppuccin-macchiato.nix;
+          wallpaper = "/home/ml/pics/wallpapers/stalenhag-street.jpg";
+          theme.colors = import ../themes/solarized.nix;
           font = {
             size = 16;
             mono = "VictorMono";
@@ -63,7 +64,7 @@ with inputs;
             package = pkgs.gnome-themes-extra;
           };
           gaming.int-fic.enable = false;
-          gaming.wine.enable = true;
+          gaming.wine.enable = false;
           swap.enable = true;
           pgp.enable = true;
           luks.enable = true;

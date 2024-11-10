@@ -4,44 +4,43 @@
   pkgs,
   ...
 }: {
-  #testing waayland with kde plasma
-  services.desktopManager.plasma6.enable = true;
-  # /*
-  environment.systemPackages = with pkgs; [
-    libva
-    nvidia-vaapi-driver
+  # ===============================================================================================
+  # for Nvidia GPU
+  # ===============================================================================================
+
+  boot.kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=1"];
+  services.xserver.videoDrivers = ["nvidia"]; # will install nvidia-vaapi-driver by default
+  hardware.nvidia = {
+    open = false;
+    # Optionally, you may need to select the appropriate driver version for your specific GPU.
+    # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/os-specific/linux/nvidia-x11/default.nix
+    # package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+    # required by most wayland compositors!
+    modesetting.enable = true;
+    powerManagement.enable = true;
+  };
+  hardware.nvidia-container-toolkit.enable = true;
+  hardware.graphics = {
+    enable = true;
+    # needed by nvidia-docker
+    enable32Bit = true;
+  };
+  # disable cudasupport before this issue get fixed:
+  # https://github.com/NixOS/nixpkgs/issues/338315
+  nixpkgs.config.cudaSupport = false;
+
+  nixpkgs.overlays = [
+    (_: super: {
+      blender = super.blender.override {
+        # https://nixos.org/manual/nixpkgs/unstable/#opt-cudaSupport
+        cudaSupport = true;
+        waylandSupport = true;
+      };
+
+      # ffmpeg-full = super.ffmpeg-full.override {
+      #   withNvcodec = true;
+      # };
+    })
   ];
-  hardware.graphics.enable = true;
-  hardware.nvidia.open = true;
-
-  #   # Load nvidia driver for Xorg and Wayland
-  #   services.xserver.videoDrivers = ["nvidia"];
-
-  #   hardware.nvidia = {
-  #     # Modesetting is required.
-  #     modesetting.enable = true;
-
-  #     # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-  #     # Enable this if you have graphical corruption issues or application crashes after waking
-  #     # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead
-  #     # of just the bare essentials.
-  #     powerManagement.enable = true;
-
-  #     # Fine-grained power management. Turns off GPU when not in use.
-  #     # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-  #     # Use the NVidia open source kernel module (not to be confused with the
-  #     # independent third-party "nouveau" open source driver).
-  #     # Support is limited to the Turing and later architectures. Full list of
-  #     # supported GPUs is at:
-  #     # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
-  #     # Only available from driver 515.43.04+
-  #     open = false;
-
-  #     # Enable the Nvidia settings menu,
-  #     # accessible via `nvidia-settings`.
-  #     nvidiaSettings = true;
-
-  #     # Optionally, you may need to select the appropriate driver version for your specific GPU.
-  #     package = config.boot.kernelPackages.nvidiaPackages.production;
-  #   };
 }

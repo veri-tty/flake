@@ -25,7 +25,7 @@
         "git.confirmSync" = false;
         "git.enableSmartCommit" = true;
 
-        "workbench.colorTheme" = "Evans Dark Theme";
+        "workbench.colorTheme" = "Solarized-Palenight";
         "workbench.iconTheme" = "catppuccin-macchiato";
 
         ## Auto save

@@ -12,12 +12,14 @@
       then pkgs.firefox-wayland
       else pkgs.firefox;
   in {
+    environment.systemPackages = [
+      pkgs.session-desktop
+    ];
     home-manager.users.${config.user} = lib.mkIf config.firefox.enable {
       ## Setting the proper session variables for wayland
       home.sessionVariables = lib.mkIf config.wayland.enable {
         MOZ_ENABLE_WAYLAND = "1";
       };
-
       ## Enabling firefox
       programs.firefox = {
         enable = true;

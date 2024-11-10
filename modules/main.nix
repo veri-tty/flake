@@ -107,6 +107,12 @@
         default = "false";
       };
     };
+    plasma-6 = {
+      enable = lib.mkEnableOption {
+        description = "Enable the Plasma 6 Desktop Environment";
+        default = "false";
+      };
+    };
     wallpaper = lib.mkOption {
       type = lib.types.str;
       description = "should be somewhat obvious you airhead";
@@ -260,7 +266,6 @@
       };
     };
 
-
     ## Timezone and locales
     ## I don't travel
     time.timeZone = "Europe/Berlin";
@@ -315,9 +320,10 @@
     ./system/nvidia.nix
     ./system/backlight.nix
     ./wm/sway/sway.nix
-    ./wm/hyprland.nix
+    ./wm/hypr/hyprland.nix
     ./wm/awesome.nix
     ./wm/cosmic.nix
+    ./wm/plasma-6.nix
     # we cant have nice, clean things such as this:
     # (lib.mkIf config.docker.enable ./services/docker.nix)
     # because of silly infinite recursion :(
