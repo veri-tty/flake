@@ -15,6 +15,7 @@ with inputs;
     ##
     ## It takes an array of modules.
     modules = [
+      stylix.nixosModules.stylix
       inputs.nixos-cosmic.nixosModules.default
       nur.nixosModules.nur
       home-manager.nixosModules.home-manager
@@ -41,11 +42,12 @@ with inputs;
           gui.enable = true;
           wayland.enable = true;
           stateVers = "24.05";
-          sway.enable = false;
-          awesome.enable = true;
-          cosmic.enable = false;
-          hyprland.enable = true;
-          plasma-6.enable = false;
+          wm = {
+            sway.enable = false;
+            cosmic.enable = false;
+            hyprland.enable = true;
+            plasma-6.enable = false;
+          };
           shell = "zsh";
           machine.isLaptop = false;
           nvidia.enable = true;

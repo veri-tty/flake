@@ -7,7 +7,7 @@
   imports = [
     ./hyprpaper.nix
   ];
-  config = lib.mkIf config.hyprland.enable {
+  config = lib.mkIf config.wm.hyprland.enable {
     environment.systemPackages = with pkgs; [
       waybar
       hyprpaper
@@ -25,8 +25,10 @@
           env = XDG_SESSION_TYPE,wayland
           env = GBM_BACKEND,nvidia-drm
           env = __GLX_VENDOR_LIBRARY_NAME,nvidia
-          env = ELECTRON_OZONE_PLATFORM_HINT,auto
-        cursor:no_hardware_cursors
+          env = WLR_NO_HARDWARE_CURSORS,1
+          cursor {
+            no_hardware_cursors = true
+          }
           ################
           ### MONITORS ###
           ################
@@ -59,7 +61,7 @@
           #####################
           ### LOOK AND FEEL ###
           #####################
-          
+
           # Refer to https://wiki.hyprland.org/Configuring/Variables/
 
           # https://wiki.hyprland.org/Configuring/Variables/#general

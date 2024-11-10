@@ -80,39 +80,6 @@
         default = false;
       };
     };
-
-    # window manager and theming related stuffs
-
-    sway = {
-      enable = lib.mkEnableOption {
-        description = "Sway or not.";
-        default = false;
-      };
-    };
-    cosmic = {
-      enable = lib.mkEnableOption {
-        description = "Cosmic DE (via flake-input and in alpha right now) or not.";
-        default = false;
-      };
-    };
-    awesome = {
-      enable = lib.mkEnableOption {
-        description = "Enable the X11 window manager Awesome WM (its awesome tm)";
-        default = false;
-      };
-    };
-    hyprland = {
-      enable = lib.mkEnableOption {
-        description = "Enable HyprWM";
-        default = "false";
-      };
-    };
-    plasma-6 = {
-      enable = lib.mkEnableOption {
-        description = "Enable the Plasma 6 Desktop Environment";
-        default = "false";
-      };
-    };
     wallpaper = lib.mkOption {
       type = lib.types.str;
       description = "should be somewhat obvious you airhead";
@@ -152,13 +119,6 @@
       default = "zsh";
     };
 
-    vscode = {
-      enable = lib.mkEnableOption {
-        description = "Enable VSCode.";
-        default = false;
-      };
-    };
-
     pgp = {
       enable = lib.mkEnableOption {
         description = "Enable PGP, Gnupgp and all that shabang";
@@ -190,12 +150,6 @@
         default = false;
       };
     };
-    obsidian = {
-      enable = lib.mkEnableOption {
-        description = "Enable Obsidian Notes";
-        default = false;
-      };
-    };
     syncthing = {
       enable = lib.mkEnableOption {
         description = "Enable Syncthing Service";
@@ -221,27 +175,27 @@
       };
     };
 
-    # well gaming related stuffs duh
-    gaming = {
-      int-fic = {
-        enable = lib.mkEnableOption {
-          description = "Whether to enable the Gargoyle Interactive Fiction Interpreter";
-          default = false;
-        };
-      };
-      wine = {
-        enable = lib.mkEnableOption {
-          description = "Whether to enable the Wine compatibility layer";
-          default = false;
-        };
-      };
-      steam = {
-        enable = lib.mkEnableOption {
-          description = "Whether to enable Steam";
-          default = false;
-        };
-      };
-    };
+    # # well gaming related stuffs duh
+    # gaming = {
+    #   int-fic = {
+    #     enable = lib.mkEnableOption {
+    #       description = "Whether to enable the Gargoyle Interactive Fiction Interpreter";
+    #       default = false;
+    #     };
+    #   };
+    #   wine = {
+    #     enable = lib.mkEnableOption {
+    #       description = "Whether to enable the Wine compatibility layer";
+    #       default = false;
+    #     };
+    #   };
+    #   steam = {
+    #     enable = lib.mkEnableOption {
+    #       description = "Whether to enable Steam";
+    #       default = false;
+    #     };
+    #   };
+    # };
   };
   ## Global configuration
   ## Should only contain global settings that are not related to
@@ -295,15 +249,13 @@
     system.stateVersion = "${config.stateVers}";
   };
   imports = [
-    ./graphical/notetaking.nix
+    ./graphical/gaming
+    ./graphical/wm
+    ./graphical/editors
     ./graphical/terminal.nix
     ./graphical/thunderbird.nix
-    ./graphical/vscode.nix
     ./graphical/browsers/firefox.nix
     ./graphical/browsers/schizofox.nix
-    ./graphical/gaming/interactive-fiction.nix
-    ./graphical/gaming/wine.nix
-    ./graphical/gaming/steam.nix
     ./services/bluetooth.nix
     ./services/docker.nix
     ./services/pipewire.nix
@@ -319,14 +271,5 @@
     ./system/networking.nix
     ./system/nvidia.nix
     ./system/backlight.nix
-    ./wm/sway/sway.nix
-    ./wm/hypr/hyprland.nix
-    ./wm/awesome.nix
-    ./wm/cosmic.nix
-    ./wm/plasma-6.nix
-    # we cant have nice, clean things such as this:
-    # (lib.mkIf config.docker.enable ./services/docker.nix)
-    # because of silly infinite recursion :(
-    # maybe because of conditional in the imported file itself?
   ];
 }

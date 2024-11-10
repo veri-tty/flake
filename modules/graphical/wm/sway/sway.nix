@@ -4,13 +4,7 @@
   pkgs,
   ...
 }: {
-  imports = [
-    #./waybar.nix
-    #./rofi.nix
-    #./cursor.nix
-    #./theme.nix
-  ];
-  config = lib.mkIf config.sway.enable {
+  config = lib.mkIf config.wm.sway.enable {
     environment.systemPackages = [
       pkgs.swaybg
     ];
@@ -38,11 +32,11 @@
               xkb_layout = config.keyboard.layout;
             };
           };
-	  output = {
-	    DP-1 = {
-	      mode = "2560x1440@143.998Hz";   
-	    };
-	  };
+          output = {
+            DP-1 = {
+              mode = "2560x1440@143.998Hz";
+            };
+          };
 
           workspaceAutoBackAndForth = true;
 

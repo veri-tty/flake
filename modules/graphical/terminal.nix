@@ -5,14 +5,6 @@
   ...
 }: {
   config = {
-    # Set the Rofi-Systemd terminal for viewing logs
-    # Using optionalAttrs because only available in NixOS
-    environment =
-      {}
-      // lib.attrsets.optionalAttrs (builtins.hasAttr "sessionVariables" config.environment) {
-        sessionVariables.ROFI_SYSTEMD_TERM = lib.mkDefault "${pkgs.kitty}/bin/kitty";
-      };
-
     home-manager.users.${config.user} = {
       programs.kitty = lib.mkIf (config.terminal == "kitty") {
         enable = true;
@@ -21,8 +13,8 @@
         font.size = 15;
         font.name = "${config.font.mono}";
         themeFile = "Solarized_Dark_Higher_Contrast";
-
         settings = {
+          background_opacity = 0.7;
           # Scrollback
           scrollback_lines = 10000;
           scrollback_pager_history_size = 300; # MB

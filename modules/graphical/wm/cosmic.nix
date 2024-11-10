@@ -8,7 +8,7 @@
   imports = [
     inputs.nixos-cosmic.nixosModules.default
   ];
-  services = lib.mkIf config.cosmic.enable {
+  services = lib.mkIf config.wm.cosmic.enable {
     desktopManager.cosmic.enable = true;
     displayManager.cosmic-greeter.enable = true;
   };

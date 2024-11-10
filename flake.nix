@@ -9,6 +9,7 @@
     schizofox.url = "github:schizofox/schizofox";
     nur.url = "github:nix-community/NUR";
     nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
+    stylix.url = "github:danth/stylix";
   };
 
   outputs = {

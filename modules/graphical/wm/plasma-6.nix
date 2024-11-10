@@ -4,6 +4,6 @@
   config,
   ...
 }:
-lib.mkIf config.plasma-6.enable {
+lib.mkIf config.wm.plasma-6.enable {
   services.desktopManager.plasma6.enable = true;
 }
