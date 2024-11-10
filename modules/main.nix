@@ -260,17 +260,7 @@
       };
     };
 
-    ## OpenGL support
-    hardware = {
-      graphics = {
-        enable = true;
-        enable32Bit = true;
-        extraPackages = with pkgs; [
-          vaapiVdpau
-          libvdpau-va-gl
-        ];
-      };
-    };
+
     ## Timezone and locales
     ## I don't travel
     time.timeZone = "Europe/Berlin";
