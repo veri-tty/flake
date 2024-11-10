@@ -24,12 +24,6 @@ with inputs;
       #inputs.nixos-hardware.nixosModules.common-gpu-nvidia
       inputs.nixos-hardware.nixosModules.common-pc
       inputs.nixos-hardware.nixosModules.common-pc-ssd
-      {
-        nix.settings = {
-          substituters = ["https://cosmic.cachix.org/"];
-          trusted-public-keys = ["cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="];
-        };
-      }
       ## System specific
       ## Closure that returns the module containing configuration specific
       ## to this machine. In order to make it a function we need to wrap it
