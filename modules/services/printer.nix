@@ -4,9 +4,11 @@
   pkgs,
   ...
 }: {
-  services.printing.enable = true;
-  services.avahi.enable = true;
-  services.avahi.nssmdns4 = true;
-  # for a WiFi printer
-  services.avahi.openFirewall = true;
+  services = {
+    printing.enable = true;
+    avahi.enable = true;
+    avahi.nssmdns4 = true;
+    # for a WiFi printer
+    avahi.openFirewall = false;
+  };
 }

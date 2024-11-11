@@ -4,6 +4,13 @@
   pkgs,
   ...
 }: {
+  options = {
+    shell = lib.mkOption {
+      type = lib.types.string;
+      description = "Shell to use";
+      default = "zsh";
+    };
+  };
   config = {
     ## Enable ZSH system wide
     programs.zsh.enable = true;
@@ -19,8 +26,6 @@
 
     # Add Zoxide
     home-manager.users.${config.user} = {
-      xdg.configFile."mimeapps.list".force = true; # Removes mimieapps.list when rebuilding system to prevent error, probably gonna be fixed at some point, but in here for now
-
       programs.zoxide = {
         enable = true;
         enableZshIntegration = true;
@@ -35,7 +40,6 @@
       ## ZSH configuration
       programs.zsh = {
         enable = true;
-
         shellAliases = {
           nrs = "sudo nixos-rebuild switch --flake /home/ml/projects/flake#";
           cat = "bat";

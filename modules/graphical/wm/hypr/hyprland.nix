@@ -21,7 +21,7 @@
         enable = true;
         systemd.enable = true;
         extraConfig = ''
-          env = LIBVA_DRIVER_NAME,nvidia
+          env = LIBVA_DRIVER_NAME,direct
           env = XDG_SESSION_TYPE,wayland
           env = GBM_BACKEND,nvidia-drm
           env = __GLX_VENDOR_LIBRARY_NAME,nvidia

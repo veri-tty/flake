@@ -4,6 +4,16 @@
   pkgs,
   ...
 }: {
+  options = {
+    ## Laptop
+    machine = {
+      isLaptop = lib.mkOption {
+        type = lib.types.bool;
+        description = "Whether the machine is a laptop";
+        default = false;
+      };
+    };
+  };
   config = lib.mkIf config.machine.isLaptop {
     ## Enabling brightnessctl
     environment.systemPackages = [pkgs.brightnessctl];
@@ -17,6 +27,14 @@
           bindsym --locked XF86MonBrightnessDown exec ${pkgs.brightnessctl}/bin/brightnessctl set 5%-
         '';
       };
+    };
+    ## Enabling bluetooth
+    hardware.bluetooth.enable = true;
+    services.blueman.enable = true;
+
+    ## Enabling tray icon
+    home-manager.users.${config.user} = {
+      services.blueman-applet.enable = true;
     };
   };
 }

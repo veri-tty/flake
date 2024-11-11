@@ -51,8 +51,9 @@ with inputs;
           shell = "zsh";
           machine.isLaptop = false;
           nvidia.enable = true;
-          firefox.enable = true;
-          schizofox.enable = false;
+          browser = {
+            firefox.enable = true;
+          };
           keyboard.layout = "de";
           # themeing etc.
           wallpaper = "/home/ml/pics/wallpapers/stalenhag-street.jpg";
@@ -66,7 +67,7 @@ with inputs;
             package = pkgs.gnome-themes-extra;
           };
           gaming.int-fic.enable = false;
-          gaming.wine.enable = false;
+          gaming.wine.enable = true;
           swap.enable = true;
           pgp.enable = true;
           luks.enable = true;

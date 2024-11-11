@@ -15,27 +15,4 @@
   users.users.${config.user} = {
     extraGroups = ["networkmanager"];
   };
-
-  ## Configuring nm app windows to be floating
-  home-manager.users.${config.user} = {
-    home.packages = [pkgs.networkmanagerapplet];
-    wayland.windowManager.sway = lib.mkIf config.sway.enable {
-      config.window = {
-        commands = [
-          {
-            command = "floating enable, border pixel 2";
-            criteria = {
-              app_id = "nm-.*";
-            };
-          }
-        ];
-      };
-
-      ## Enabling nm-applet via config.programs.nm-applet will not show icon
-      ## Need to do it through sway
-      extraConfig = ''
-        exec nm-applet --indicator
-      '';
-    };
-  };
 }

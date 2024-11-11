@@ -33,40 +33,10 @@
       };
     };
 
-    #
-    #
-    # system specific settings
-    luks = {
-      enable = lib.mkEnableOption {
-        description = "Enable LUKS encryption";
-        default = false;
-      };
-    };
-
-    swap = {
-      enable = lib.mkEnableOption {
-        description = "Swapfile?";
-        default = false;
-      };
-    };
-
-    machine = {
-      isLaptop = lib.mkOption {
-        type = lib.types.bool;
-        description = "Whether the machine is a laptop";
-        default = false;
-      };
-    };
     stateVers = lib.mkOption {
       # is defined in flake.nix
       type = lib.types.str;
       description = "State version of nixos and home-manager";
-    };
-    gui = {
-      enable = lib.mkEnableOption {
-        description = "Enable graphics.";
-        default = false;
-      };
     };
     wayland = {
       enable = lib.mkEnableOption {
@@ -74,51 +44,6 @@
         default = false;
       };
     };
-    nvidia = {
-      enable = lib.mkEnableOption {
-        description = "Nvidia or not.";
-        default = false;
-      };
-    };
-    wallpaper = lib.mkOption {
-      type = lib.types.str;
-      description = "should be somewhat obvious you airhead";
-    };
-    theme = {
-      colors = lib.mkOption {
-        type = lib.types.attrs;
-        description = "Base16 color scheme.";
-        default = import ../themes/catppuccin-macchiato.nix;
-      };
-    };
-    gtk.theme = {
-      name = lib.mkOption {
-        type = lib.types.str;
-        description = "Theme name for GTK applications";
-      };
-      package = lib.mkOption {
-        type = lib.types.package;
-        description = "Theme package for GTK applications";
-        default = pkgs.magnetic-catppuccin-gtk;
-      };
-    };
-    font = {
-      size = lib.mkOption {
-        type = lib.types.int;
-        default = 16;
-      };
-      mono = lib.mkOption {
-        type = lib.types.str;
-        description = "Default monospaced font";
-        default = "VictorMono";
-      };
-    };
-    shell = lib.mkOption {
-      type = lib.types.string;
-      description = "Shell to use";
-      default = "zsh";
-    };
-
     pgp = {
       enable = lib.mkEnableOption {
         description = "Enable PGP, Gnupgp and all that shabang";
@@ -126,45 +51,9 @@
       };
     };
 
-    terminal = lib.mkOption {
-      type = lib.types.str;
-      description = "Default terminal emulator";
-      default = "kitty";
-    };
-
-    thunderbird = {
-      enable = lib.mkEnableOption {
-        description = "Enable Thunderbird";
-        default = false;
-      };
-    };
-    firefox = {
-      enable = lib.mkEnableOption {
-        description = "Enable Firefox";
-        default = false;
-      };
-    };
-    schizofox = {
-      enable = lib.mkEnableOption {
-        description = "Enable Schizofox";
-        default = false;
-      };
-    };
     syncthing = {
       enable = lib.mkEnableOption {
         description = "Enable Syncthing Service";
-        default = false;
-      };
-    };
-    mullvad = {
-      enable = lib.mkEnableOption {
-        description = "Enable Mullvad VPN";
-        default = false;
-      };
-    };
-    tailscale = {
-      enable = lib.mkEnableOption {
-        description = "Enable Tailscale VPN";
         default = false;
       };
     };
@@ -174,28 +63,6 @@
         default = false;
       };
     };
-
-    # # well gaming related stuffs duh
-    # gaming = {
-    #   int-fic = {
-    #     enable = lib.mkEnableOption {
-    #       description = "Whether to enable the Gargoyle Interactive Fiction Interpreter";
-    #       default = false;
-    #     };
-    #   };
-    #   wine = {
-    #     enable = lib.mkEnableOption {
-    #       description = "Whether to enable the Wine compatibility layer";
-    #       default = false;
-    #     };
-    #   };
-    #   steam = {
-    #     enable = lib.mkEnableOption {
-    #       description = "Whether to enable Steam";
-    #       default = false;
-    #     };
-    #   };
-    # };
   };
   ## Global configuration
   ## Should only contain global settings that are not related to
@@ -250,26 +117,12 @@
   };
   imports = [
     ./graphical/gaming
+    ./graphical/browsers
     ./graphical/wm
     ./graphical/editors
-    ./graphical/terminal.nix
-    ./graphical/thunderbird.nix
-    ./graphical/browsers/firefox.nix
-    ./graphical/browsers/schizofox.nix
-    ./services/bluetooth.nix
-    ./services/docker.nix
-    ./services/pipewire.nix
-    ./services/syncthing.nix
-    ./services/vpn.nix
-    ./services/git.nix
-    ./services/pgp.nix
-    ./services/xdg.nix
-    ./shell/zsh.nix
-    ./system/boot.nix
-    ./system/filesystem.nix
-    ./system/font.nix
-    ./system/networking.nix
-    ./system/nvidia.nix
-    ./system/backlight.nix
+    ./graphical
+    ./system
+    ../profiles
+    ./services
   ];
 }

@@ -5,6 +5,16 @@
   inputs,
   ...
 }: {
+  options = {
+    browser = {
+      firefox = {
+        enable = lib.mkEnableOption {
+          description = "Enable Firefox";
+          default = false;
+        };
+      };
+    };
+  };
   config = let
     ## Choosing the correct package depending on the window system in use
     firefoxPkg =
@@ -15,7 +25,7 @@
     environment.systemPackages = [
       pkgs.session-desktop
     ];
-    home-manager.users.${config.user} = lib.mkIf config.firefox.enable {
+    home-manager.users.${config.user} = lib.mkIf config.browser.firefox.enable {
       ## Setting the proper session variables for wayland
       home.sessionVariables = lib.mkIf config.wayland.enable {
         MOZ_ENABLE_WAYLAND = "1";
