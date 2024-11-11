@@ -37,7 +37,7 @@
         documents = "${config.home-manager.users.${config.user}.home.homeDirectory}/docs";
         download = "${config.home-manager.users.${config.user}.home.homeDirectory}/dl";
         pictures = "${config.home-manager.users.${config.user}.home.homeDirectory}/pics";
-        projects = "${config.home-manager.users.${config.user}.home.homeDirectory}/projects";
+        #projects = "${config.home-manager.users.${config.user}.home.homeDirectory}/projects";
 
         ## Unused directories
         desktop = null;

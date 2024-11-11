@@ -44,25 +44,6 @@
         default = false;
       };
     };
-    pgp = {
-      enable = lib.mkEnableOption {
-        description = "Enable PGP, Gnupgp and all that shabang";
-        default = false;
-      };
-    };
-
-    syncthing = {
-      enable = lib.mkEnableOption {
-        description = "Enable Syncthing Service";
-        default = false;
-      };
-    };
-    docker = {
-      enable = lib.mkEnableOption {
-        description = "Enable Docker";
-        default = false;
-      };
-    };
   };
   ## Global configuration
   ## Should only contain global settings that are not related to
