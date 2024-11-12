@@ -3,6 +3,7 @@
     ./interactive-fiction.nix
     ./wine.nix
     ./steam.nix
+    ./lutris.nix
   ];
   options = {
     gaming = {
@@ -21,6 +22,12 @@
       steam = {
         enable = lib.mkEnableOption {
           description = "Whether to enable Steam";
+          default = false;
+        };
+      };
+      lutris = {
+        enable = lib.mkEnableOption {
+          description = "Whether to enable Lutris";
           default = false;
         };
       };

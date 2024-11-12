@@ -7,6 +7,7 @@
     ./terminal.nix
     ./theme.nix
     ./thunderbird.nix
+    ./spotify.nix
   ];
   options = {
     terminal = lib.mkOption {

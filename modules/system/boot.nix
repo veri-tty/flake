@@ -1,7 +1,8 @@
 {
+  inputs,
   config,
-  lib,
   pkgs,
+  lib,
   ...
 }: {
   config = {
@@ -13,10 +14,14 @@
         efiSupport = true;
         enableCryptodisk = true;
         device = "nodev";
-        theme = null;
+        theme = inputs.nixos-grub-themes.packages.${pkgs.system}.nixos;
         backgroundColor = null;
         splashImage = null;
       };
+      # Hide the OS choice for bootloaders.
+      # It's still possible to open the bootloader list by pressing any key
+      # It will just not appear on screen unless a key is pressed
+      timeout = 0;
       ## Allow bootloader to alter the UEFI
       efi.canTouchEfiVariables = true;
     };

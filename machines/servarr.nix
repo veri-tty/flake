@@ -15,9 +15,7 @@ with inputs;
     ##
     ## It takes an array of modules.
     modules = [
-      stylix.nixosModules.stylix
       inputs.agenix.nixosModules.default
-      inputs.spicetify-nix.nixosModules.default
       inputs.nixos-cosmic.nixosModules.default
       nur.nixosModules.nur
       home-manager.nixosModules.home-manager
@@ -43,14 +41,14 @@ with inputs;
           wm = {
             sway.enable = false;
             cosmic.enable = false;
-            hyprland.enable = true;
+            hyprland.enable = false;
             plasma-6.enable = false;
           };
           shell = "zsh";
           machine.isLaptop = false;
-          nvidia.enable = true;
+          nvidia.enable = false;
           browser = {
-            firefox.enable = true;
+            firefox.enable = false;
           };
           keyboard.layout = "de";
           # themeing etc.
@@ -65,19 +63,19 @@ with inputs;
             package = pkgs.gnome-themes-extra;
           };
           gaming.int-fic.enable = false;
-          gaming.wine.enable = true;
-          gaming.lutris.enable = true;
-          swap.enable = true;
-          pgp.enable = true;
+          gaming.wine.enable = false;
+          gaming.steam.enable = false;
+          swap.enable = false;
+          pgp.enable = false;
           luks.enable = true;
-          wm.windows.enable = true;
-          mullvad.enable = true;
-          syncthing.enable = true;
+          wm.windows.enable = false;
+          mullvad.enable = false;
+          syncthing.enable = false;
           tailscale.enable = true;
-          spotify.enable = true;
-          thunderbird.enable = true;
-          obsidian.enable = true;
-          vscode.enable = true;
+          spotify.enable = false;
+          thunderbird.enable = false;
+          obsidian.enable = false;
+          vscode.enable = false;
           docker.enable = true;
 
           console = {
@@ -90,7 +88,7 @@ with inputs;
             isNormalUser = true;
           };
           ## networking
-          networking.hostName = "cathedral";
+          networking.hostName = "servarr";
 
           ## kernel
           boot.initrd.kernelModules = ["vmd"];
@@ -104,9 +102,9 @@ with inputs;
           ];
           hardware.enableAllFirmware = true;
           hardware.cpu.amd.updateMicrocode = true;
-          services.xserver.videoDrivers = [
-            "nvidia"
-          ];
+          #services.xserver.videoDrivers = [
+          #  "nvidia"
+          #];
         };
       })
 

@@ -6,6 +6,8 @@
 }: {
   imports = [
     ./hyprpaper.nix
+    ./wofi.nix
+    ./greetd.nix
   ];
   config = lib.mkIf config.wm.hyprland.enable {
     environment.systemPackages = with pkgs; [
@@ -35,6 +37,9 @@
 
           # See https://wiki.hyprland.org/Configuring/Monitors/
           monitor = DP-1, 2560x1440@144, 0x0, 1.6
+          xwayland {
+            force_zero_scaling = true
+          }
 
 
           ###################
@@ -207,6 +212,7 @@
 
           # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
           bind = $mainMod, Return, exec, $terminal
+          bind = $mainMod, Space, exec, wofi --show drun
           bind = $mainMod, Q, killactive,
           bind = $mainMod, M, exit,
           bind = $mainMod, W, exec, firefox
