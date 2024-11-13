@@ -103,6 +103,7 @@
             #tabbrowser-tabs {
               border-inline-start: 0 !important;
             }
+            #navigator-toolbox { font-family:VictorMono !important }
             /* Private Browsing indicator on macOS */
             #private-browsing-indicator-with-label {
               background-color: ${config.theme.colors.base00} !important;
@@ -153,7 +154,7 @@
             }
             /* Text in URL bar */
             #urlbar-input, #urlbar-scheme, .searchbar-textbox {
-              color: ${config.theme.colors.base07} !important;
+              color: ${config.theme.colors.base05} !important;
             }
           '';
           userContent = ''
