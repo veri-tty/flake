@@ -37,19 +37,23 @@ with inputs;
           gui.enable = true;
           wayland.enable = true;
           stateVers = "24.05";
-          sway.enable = true;
+          wm.sway.enable = false;
+          wm.hyprland.enable = true;
           shell = "zsh";
+          qbit.enable = true;
           machine.isLaptop = true;
           nvidia.enable = false;
-          firefox.enable = true;
-          schizofox.enable = false;
+          browser = {
+            firefox.enable = true;
+          };
+          #schizofox.enable = false;
           keyboard.layout = "de";
           gaming.int-fic.enable = true;
           gaming.wine.enable = false;
           gaming.steam.enable = true;
           syncthing.enable = true;
           # themeing etc.
-          wallpaper = "/home/ml/pics/wallpapers/a_winternight_in_calgary.jpg";
+          wallpaper = "/home/ml/pics/wallpapers/floyd.jpg ";
           theme.colors = import ../themes/catppuccin-macchiato.nix;
           font = {
             size = 16;
@@ -93,7 +97,6 @@ with inputs;
           ];
 
           boot.kernelModules = ["kvm-intel"];
-          boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_latest;
           boot.initrd.luks.cryptoModules = [
             "aes"
             "aes_generic"

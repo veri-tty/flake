@@ -15,7 +15,7 @@
   # ===============================================================================================
   # for Nvidia GPU
   # ===============================================================================================
-  config = {
+  config = lib.mkIf config.nvidia.enable {
     boot.kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=1"];
     hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
     services.xserver.videoDrivers = ["nvidia"]; # will install nvidia-vaapi-driver by default

@@ -31,10 +31,5 @@
     ## Enabling bluetooth
     hardware.bluetooth.enable = true;
     services.blueman.enable = true;
-
-    ## Enabling tray icon
-    home-manager.users.${config.user} = {
-      services.blueman-applet.enable = true;
-    };
   };
 }

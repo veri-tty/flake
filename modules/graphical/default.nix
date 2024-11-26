@@ -8,6 +8,8 @@
     ./theme.nix
     ./thunderbird.nix
     ./spotify.nix
+    ./notflix.nix
+    ./qbittorrent.nix
   ];
   options = {
     terminal = lib.mkOption {
