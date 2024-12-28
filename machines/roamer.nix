@@ -43,6 +43,7 @@ with inputs;
           qbit.enable = true;
           machine.isLaptop = true;
           nvidia.enable = false;
+          arduino.enable = true;
           browser = {
             firefox.enable = true;
           };
@@ -53,7 +54,7 @@ with inputs;
           gaming.steam.enable = true;
           syncthing.enable = true;
           # themeing etc.
-          wallpaper = "/home/ml/pics/wallpapers/floyd.jpg ";
+          wallpaper = "/home/ml/pics/wallpapers/nix-black-4k.png ";
           theme.colors = import ../themes/catppuccin-macchiato.nix;
           font = {
             size = 16;

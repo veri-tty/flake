@@ -43,6 +43,7 @@
         shellAliases = {
           nrs = "sudo nixos-rebuild switch --flake /home/ml/projects/flake#";
           cat = "bat";
+          mediaserver = "ssh ml@100.73.1.64";
         };
 
         ## Enable some QOL features

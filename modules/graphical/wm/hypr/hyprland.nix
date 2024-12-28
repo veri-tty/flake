@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./hyprpaper.nix
+    ./hyprlock.nix
     ./wofi.nix
     ./greetd.nix
   ];
@@ -15,6 +16,7 @@
       hyprpaper
       libva
       nvidia-vaapi-driver
+      hyprshot
     ];
     wayland.enable = true;
     home-manager.users.${config.user} = {
@@ -183,10 +185,11 @@
 
               follow_mouse = 1
 
-              sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
+              sensitivity = 0.4 # -1.0 - 1.0, 0 means no modification.
 
               touchpad {
-                  natural_scroll = false
+                  natural_scroll = true
+                  disable_while_typing = yes
               }
           }
 
@@ -215,6 +218,7 @@
           bind = $mainMod, Space, exec, wofi --show drun
           bind = $mainMod, Q, killactive,
           bind = $mainMod, M, exit,
+          bind = $mainMod, L, exec, hyprlock
           bind = $mainMod, W, exec, firefox
           bind = $mainMod, C, exec, code --enable-features=UseOzonePlatform --ozone-platform=wayland
           bind = $mainMod, V, togglefloating,
