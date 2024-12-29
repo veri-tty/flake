@@ -54,7 +54,7 @@ with inputs;
           gaming.steam.enable = true;
           syncthing.enable = true;
           # themeing etc.
-          wallpaper = "/home/ml/pics/wallpapers/nix-black-4k.png ";
+          wallpaper = "/home/ml/pics/wallpapers/throguhtefields_misty.jpg";
           theme.colors = import ../themes/catppuccin-macchiato.nix;
           font = {
             size = 16;
@@ -73,7 +73,7 @@ with inputs;
           obsidian.enable = true;
           vscode.enable = true;
           docker.enable = true;
-
+          virtualbox.enable = true;
           console = {
             font = "VictorMono";
             keyMap = config.keyboard.layout;

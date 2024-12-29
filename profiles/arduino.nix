@@ -16,6 +16,9 @@
   # for Nvidia GPU
   # ===============================================================================================
   config = lib.mkIf config.arduino.enable {
-    environment.systemPackages = [pkgs.arduino-ide];
+    environment.systemPackages = [
+      pkgs.arduino-ide
+      pkgs.cp210x-program
+    ];
   };
 }
