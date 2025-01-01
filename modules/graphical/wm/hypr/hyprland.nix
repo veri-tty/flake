@@ -41,6 +41,12 @@
             force_zero_scaling = true
           }
 
+          ###################
+          ##  STARTUP ONCE ##
+          ###################
+
+          exec-once = polkit-agent-helper-1
+          exec-once = systemctl start --user polkit-gnome-authentication-agent-1
 
           ###################
           ### MY PROGRAMS ###

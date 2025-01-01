@@ -70,7 +70,7 @@ with inputs;
           swap.enable = true;
           pgp.enable = true;
           luks.enable = true;
-          wm.windows.enable = true;
+          #vm.windows.enable = true;
           mullvad.enable = true;
           syncthing.enable = true;
           tailscale.enable = true;
