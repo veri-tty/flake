@@ -13,7 +13,7 @@
         splash_offset = 2.0;
         preload = ["${config.wallpaper}"];
         wallpaper = [
-          "DP-1,${config.wallpaper}"
+          "eDP-1,${config.wallpaper}"
         ];
       };
     };

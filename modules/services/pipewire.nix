@@ -21,7 +21,7 @@
       ## Configure pavu to be floating
       wayland.windowManager.sway = {
         config.window = {
-          commands = lib.mkIf config.sway.enable [
+          commands = lib.mkIf config.wm.sway.enable [
             {
               command = "floating enable, border pixel 2";
               criteria = {

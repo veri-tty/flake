@@ -7,6 +7,7 @@
     ./vpn.nix
     ./xdg.nix
     ./pipewire.nix
+    ./virtualbox.nix
     ./printer.nix
   ];
 }
