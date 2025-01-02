@@ -19,7 +19,7 @@ with inputs;
       inputs.agenix.nixosModules.default
       inputs.spicetify-nix.nixosModules.default
       inputs.nixos-cosmic.nixosModules.default
-      nur.nixosModules.nur
+      nur.modules.nixos.default
       home-manager.nixosModules.home-manager
       ## Applying recommended hardware settings
       inputs.nixos-hardware.nixosModules.common-cpu-amd
@@ -42,7 +42,7 @@ with inputs;
           stateVers = "24.05";
           wm = {
             sway.enable = false;
-            cosmic.enable = false;
+            cosmic.enable = true;
             hyprland.enable = true;
             plasma-6.enable = false;
           };

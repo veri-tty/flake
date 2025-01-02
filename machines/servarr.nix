@@ -17,7 +17,7 @@ with inputs;
     modules = [
       inputs.agenix.nixosModules.default
       inputs.nixos-cosmic.nixosModules.default
-      nur.nixosModules.nur
+      nur.modules.nixos.default
       home-manager.nixosModules.home-manager
       ## Applying recommended hardware settings
       inputs.nixos-hardware.nixosModules.common-cpu-amd
