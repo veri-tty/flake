@@ -56,6 +56,31 @@
         experimental-features = nix-command flakes
         warn-dirty = false
       '';
+      settings = {
+        # Make building installed systems faster
+        substituters = [
+          "https://cache.nixos.org"
+          "https://nix-community.cachix.org"
+          "https://hyprland.cachix.org"
+          "https://anyrun.cachix.org"
+          "https://neovim-flake.cachix.org"
+          #"https://cache.notashelf.dev"
+          "https://ags.cachix.org"
+          "https://veri-tty.cachix.org"
+        ];
+
+        trusted-public-keys = [
+          "veri-tty.cachix.org-1:4zasGbBChaIi0IuDiAGOPy1w080xKkktyIjMIs7DFtA="
+          "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+          "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
+          #"notashelf.cachix.org-1:VTTBFNQWbfyLuRzgm2I7AWSDJdqAa11ytLXHBhrprZk="
+          "neovim-flake.cachix.org-1:iyQ6lHFhnB5UkVpxhQqLJbneWBTzM8LBYOFPLNH4qZw="
+          "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+          "ags.cachix.org-1:naAvMrz0CuYqeyGNyLgE010iUiuf/qx6kYrUv3NwAJ8="
+        ];
+      };
 
       ## Store optimization
       optimise.automatic = true;
@@ -85,7 +110,7 @@
     ## Global packages
     ## Packages should be managed with home-manager whereever
     ## possible. Only use a set of barebones applications here.
-    environment.systemPackages = with pkgs; [git vim unzip wget curl ripgrep];
+    environment.systemPackages = with pkgs; [git cachix vim unzip wget curl ripgrep];
 
     ## Home manager settings
     home-manager.useGlobalPkgs = true;

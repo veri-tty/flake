@@ -8,6 +8,8 @@
     ./hyprpaper.nix
     ./hyprlock.nix
     ./wofi.nix
+    ./waybar.nix
+
     ./greetd.nix
   ];
   config = lib.mkIf config.wm.hyprland.enable {

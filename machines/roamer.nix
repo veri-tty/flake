@@ -54,7 +54,7 @@ with inputs;
           gaming.steam.enable = true;
           syncthing.enable = true;
           # themeing etc.
-          wallpaper = "/home/ml/pics/wallpapers/throguhtefields_misty.jpg";
+          wallpaper = "/home/ml/pics/wallpapers/streetlight.jpg";
           theme.colors = import ../themes/catppuccin-macchiato.nix;
           font = {
             size = 16;

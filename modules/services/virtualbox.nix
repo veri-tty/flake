@@ -13,8 +13,10 @@
     };
   };
   config = {
-    environment.systemPackages = lib.mkIf config.virtualbox.enable [
-      pkgs.virtualbox
-    ];
+    virtualisation.virtualbox.host.enable = true;
+    virtualisation.virtualbox.host.enableExtensionPack = true;
+    users.users.${config.user} = {
+      extraGroups = ["vboxusers"];
+    };
   };
 }
