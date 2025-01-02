@@ -13,7 +13,7 @@ with inputs;
     ##
     ## It takes an array of modules.
     modules = [
-      nur.modules.nixos.default
+      nur.nixosModules.nur
       home-manager.nixosModules.home-manager
       ## Applying recommended hardware settings
       nixos-hardware.nixosModules.common-cpu-intel

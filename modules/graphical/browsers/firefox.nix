@@ -39,7 +39,7 @@
           id = 0;
           isDefault = true;
           # https://nur.nix-community.org/repos/rycee/
-          extensions = with config.nur.repos.rycee.firefox-addons; [
+          extensions = with inputs.nur.repos.rycee.firefox-addons; [
             don-t-fuck-with-paste
             linkwarden
             #facebook-container

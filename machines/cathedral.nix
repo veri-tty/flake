@@ -2,7 +2,7 @@
   inputs,
   globals,
   #lib,
-  #pkgs,
+  pkgs,
   ...
 }:
 with inputs;
@@ -19,7 +19,7 @@ with inputs;
       inputs.agenix.nixosModules.default
       inputs.spicetify-nix.nixosModules.default
       inputs.nixos-cosmic.nixosModules.default
-      nur.modules.nixos.default
+      pkgs.nur.nixosModules.nur
       home-manager.nixosModules.home-manager
       ## Applying recommended hardware settings
       inputs.nixos-hardware.nixosModules.common-cpu-amd
