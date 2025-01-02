@@ -2,7 +2,7 @@
   inputs,
   globals,
   #lib,
-  #pkgs,
+  pkgs,
   ...
 }:
 with inputs;
@@ -19,7 +19,7 @@ with inputs;
       inputs.agenix.nixosModules.default
       inputs.spicetify-nix.nixosModules.default
       inputs.nixos-cosmic.nixosModules.default
-      nur.nixosModules.nur
+      pkgs.nur.nixosModules.nur
       home-manager.nixosModules.home-manager
       ## Applying recommended hardware settings
       inputs.nixos-hardware.nixosModules.common-cpu-amd
@@ -42,7 +42,7 @@ with inputs;
           stateVers = "24.05";
           wm = {
             sway.enable = false;
-            cosmic.enable = false;
+            cosmic.enable = true;
             hyprland.enable = true;
             plasma-6.enable = false;
           };
@@ -70,7 +70,7 @@ with inputs;
           swap.enable = true;
           pgp.enable = true;
           luks.enable = true;
-          wm.windows.enable = true;
+          #vm.windows.enable = true;
           mullvad.enable = true;
           syncthing.enable = true;
           tailscale.enable = true;

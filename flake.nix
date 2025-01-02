@@ -30,11 +30,6 @@
       user = "ml";
       stateVers = "24.05";
     };
-    overlays = [
-      inputs.nur.overlay
-      inputs.schizofox.homeManagerModules.default
-      inputs.nixos-cosmic.nixosModules.default
-    ];
 
     supportedSystems = ["x86_64-linux"];
     forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
